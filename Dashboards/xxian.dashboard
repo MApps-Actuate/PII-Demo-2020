@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="layoutPreference">auto layout</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">ThemesReportItems3.rptlibrary</property>
+            <property name="namespace">ThemesReportItems</property>
+        </structure>
+    </list-property>
+    <property name="dashboardView">
+        <dashboard id="2">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">enableGlobalFilter</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="enableGlobalFilter">true</property>
+            <property name="activeTab">e220a976-853f-41dc-8292-301d5cbf3e9c</property>
+            <property name="tabs">
+                <tab-element name="e220a976-853f-41dc-8292-301d5cbf3e9c" id="3">
+                    <list-property name="userProperties">
+                        <structure>
+                            <property name="name">responsiveView</property>
+                            <property name="type">boolean</property>
+                        </structure>
+                        <structure>
+                            <property name="name">smartLayout</property>
+                            <property name="type">string</property>
+                        </structure>
+                    </list-property>
+                    <property name="responsiveView">true</property>
+                    <property name="smartLayout">{"details":{"type":"component","componentName":"Gadget_3dba463f-1dbe-4235-bf49-3f621ebe530f"},"mainHeight":867}</property>
+                    <property name="title">New%20Tab%201</property>
+                    <property name="sections">
+                        <section id="4">
+                            <property name="width">50%</property>
+                            <property name="gadgets">
+                                <gadget name="Gadget_3dba463f-1dbe-4235-bf49-3f621ebe530f" id="9">
+                                    <property name="title">Report - Magellan PII Dashboard</property>
+                                    <property name="externalGadgetURI">/Applications/PII Demo 2020/Report Designs/Magellan PII Dashboard.rptdesign</property>
+                                    <property name="showTitle">false</property>
+                                    <property name="showBorder">true</property>
+                                    <property name="zIndex">2</property>
+                                    <property name="showScrollBar">true</property>
+                                    <property name="caption">
+                                        <gadget-caption id="10">
+                                            <property name="showCaption">false</property>
+                                            <property name="horizontalAlignment">left</property>
+                                            <property name="fontFamily">"Lato"</property>
+                                            <property name="fontSize">18pt</property>
+                                            <property name="fontWeight">normal</property>
+                                            <property name="fontStyle">normal</property>
+                                            <property name="color">#353535</property>
+                                            <property name="textUnderline">none</property>
+                                        </gadget-caption>
+                                    </property>
+                                    <property name="content">
+                                        <data-view id="11">
+                                            <list-property name="userProperties">
+                                                <structure>
+                                                    <property name="name">showViewerToolbar</property>
+                                                    <property name="type">boolean</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="showViewerToolbar">false</property>
+                                            <property name="gadgetType">viewer</property>
+                                            <property name="externalContentRef">
+                                                <external-element-ref>
+                                                    <property name="sourceFile">/Applications/PII Demo 2020/Report Designs/Magellan PII Dashboard.rptdesign</property>
+                                                </external-element-ref>
+                                            </property>
+                                        </data-view>
+                                    </property>
+                                </gadget>
+                                <gadget name="ffb836f0-90eb-4f43-b0e7-b60e743c8336" id="6">
+                                    <property name="zIndex">1</property>
+                                    <property name="isVisible">false</property>
+                                    <property name="height">150px</property>
+                                    <property name="caption">
+                                        <gadget-caption id="8">
+                                            <property name="showCaption">true</property>
+                                            <property name="horizontalAlignment">left</property>
+                                            <property name="fontFamily">"Lato"</property>
+                                            <property name="fontSize">24pt</property>
+                                            <property name="fontWeight">200</property>
+                                            <property name="color">#353535</property>
+                                        </gadget-caption>
+                                    </property>
+                                    <property name="content">
+                                        <current-selections id="7"/>
+                                    </property>
+                                </gadget>
+                            </property>
+                        </section>
+                        <section id="5">
+                            <property name="width">50%</property>
+                        </section>
+                    </property>
+                </tab-element>
+            </property>
+        </dashboard>
+    </property>
+</report>

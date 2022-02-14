@@ -1,0 +1,1393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202010131241</property>
+    <property name="units">in</property>
+    <method name="beforeFactory"><![CDATA[importPackage(Packages.org.eclipse.birt.report.model.api);
+importPackage(Packages.org.eclipse.birt.report.model.api.elements.structures);
+importPackage(Packages.org.eclipse.birt.report.model.api.elements);
+importClass(Packages.org.eclipse.birt.report.model.api.elements.DesignChoiceConstants);
+importPackage(Packages.java.util);
+
+var tstab = reportContext.getDesignHandle().findElement("Total SSN");
+var tptab = reportContext.getDesignHandle().findElement("Total Passport");
+var tdtab = reportContext.getDesignHandle().findElement("Total Docs");
+var tbtab = reportContext.getDesignHandle().findElement("Total Bank Account");
+var tctab = reportContext.getDesignHandle().findElement("Total Credit Card");
+var dltab = reportContext.getDesignHandle().findElement("Total Drivers License");
+var docsTable = reportContext.getDesignHandle().findElement("DocumentsTable");
+
+if ( params["pClassificationType"].value !== '') {
+	addTableFilter(docsTable, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value");
+	addTableFilter(tstab, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value");
+	addTableFilter(tptab, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value");
+	addTableFilter(tctab, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value")
+	addTableFilter(tdtab, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value");
+	addTableFilter(tbtab, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value");
+	addTableFilter(dltab, "dataSetRow[\"category\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pClassificationType\"].value");
+}
+
+if ( params["pPIIType"].value !== '') {
+//if (typeof params["pPIIType"] !== "undefined") {
+
+	switch(params["pPIIType"].value) {
+		case 'SSN': theColumn = 'pii_ssn_count';    break;
+		case 'Passport': theColumn = 'pii_passport_count';    break;
+		case 'Credit Card': theColumn = 'pii_creditcard_count';    break;
+		case 'Driver License': theColumn = 'pii_driverslicense_count';    break;
+		case 'Bank Account': theColumn = 'pii_bankaccount_count';    break;
+		case 'Phone #': theColumn = 'pii_phone_count';    break;
+		case 'Email': theColumn = 'pii_email_count';    break;
+		case 'Address': theColumn = 'pii_address_count';    break;
+		case 'Location': theColumn = 'pii_location_count';    break;
+		default: theColumn = 'pii_person_count';
+	}
+	addTableFilter(docsTable, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "row[\"" + theColumn + "\"]");
+	addTableFilter(tstab, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "dataSetRow[\"" + theColumn + "\"]");
+	addTableFilter(tptab, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "dataSetRow[\"" + theColumn + "\"]");
+	addTableFilter(tctab, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "dataSetRow[\"" + theColumn + "\"]");
+	addTableFilter(tdtab, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "dataSetRow[\"" + theColumn + "\"]");
+	addTableFilter(tbtab, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "dataSetRow[\"" + theColumn + "\"]");
+	addTableFilter(dltab, 0, null, DesignChoiceConstants.FILTER_OPERATOR_GT, "dataSetRow[\"" + theColumn + "\"]");
+}
+
+if ( params["pFileSource"].value !== '') {
+	addTableFilter(docsTable, "row[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+	addTableFilter(tstab, "dataSetRow[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+	addTableFilter(tptab, "dataSetRow[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+	addTableFilter(tctab, "dataSetRow[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+	addTableFilter(tdtab, "dataSetRow[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+	addTableFilter(tbtab, "dataSetRow[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+	addTableFilter(dltab, "dataSetRow[\"random_content_type\"]", null, DesignChoiceConstants.FILTER_OPERATOR_MATCH, "params[\"pFileSource\"].value");
+}
+
+if ( params["pRiskLevel"].value !== null) {
+	addTableFilter(docsTable, "row[\"PII Risk Level\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");
+	addTableFilter(tstab, "dataSetRow[\"PII Risk\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");
+	addTableFilter(tptab, "dataSetRow[\"PII Risk\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");
+	addTableFilter(tctab, "dataSetRow[\"PII Risk\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");
+	addTableFilter(tdtab, "dataSetRow[\"PII Risk\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");	
+	addTableFilter(tbtab, "dataSetRow[\"PII Risk\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");
+	addTableFilter(dltab, "dataSetRow[\"PII Risk\"]", null, DesignChoiceConstants.FILTER_OPERATOR_EQ, "params[\"pRiskLevel\"].value");
+}
+
+
+// Add Filter to elememt (chart, table)
+function addTableFilter(elemHandle,values1,values2,operator,colExpression) {
+	if(elemHandle){
+		var filterhandle = elemHandle.getPropertyHandle("filter"); 
+		var fc = StructureFactory.createFilterCond();
+		fc.setValue1(values1);
+		var expression = new Expression(colExpression, ExpressionType.JAVASCRIPT);
+		fc.setExpressionProperty( FilterCondition.EXPR_MEMBER, expression );
+		fc.setOperator(operator);
+		if (values2 != null)
+			fc.setValue2(values2);
+		filterhandle.addItem(fc);
+	}
+}]]></method>
+    <method name="clientInitialize"><![CDATA[$("<style type='text/css'> @import url('https://fonts.googleapis.com/css?family=Titillium+Web');</style>").appendTo("head");]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="pFileSource" id="3285">
+            <property name="hidden">false</property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["random_content_type"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">''</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="linkedDataModelName">GDPR Data Model</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">auto-suggest</property>
+            <property name="fixedOrder">true</property>
+            <property name="autoSuggestThreshold">1</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="pPIIType" id="3284">
+            <property name="hidden">false</property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["Cartridge Type"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">''</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="linkedDataModelName">GDPR Data Model</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">auto-suggest</property>
+            <property name="fixedOrder">true</property>
+            <property name="autoSuggestThreshold">1</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="pClassificationType" id="3286">
+            <property name="hidden">false</property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["category"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">''</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="linkedDataModelName">GDPR Data Model</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">auto-suggest</property>
+            <property name="fixedOrder">true</property>
+            <property name="autoSuggestThreshold">1</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="pRiskLevel" id="2936">
+            <property name="hidden">false</property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["PII Risk"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="linkedDataModelName">GDPR Data Model</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">auto-suggest</property>
+            <property name="fixedOrder">true</property>
+            <property name="autoSuggestThreshold">1</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <data-mart-data-source name="Text Analytics Data Source" id="4">
+            <property name="datamartURL">Data Objects/Text Analytics for GDPR</property>
+            <property name="accessType">latest</property>
+        </data-mart-data-source>
+    </data-sources>
+    <property name="linkedDataModels">
+        <data-mart-linked-data-model name="GDPR Data Model" id="5">
+            <property name="dataSource">Text Analytics Data Source</property>
+            <property name="dataObject">GDPR Data Model</property>
+        </data-mart-linked-data-model>
+    </property>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">auto</property>
+            <property name="backgroundColor">#EFEFEF</property>
+            <property name="headerHeight">1px</property>
+            <property name="footerHeight">1px</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="8369">
+            <property name="fontFamily">"Titillium Web"</property>
+            <column id="8370">
+                <property name="width">16.7%</property>
+            </column>
+            <column id="8371">
+                <property name="width">16.6%</property>
+            </column>
+            <column id="8372">
+                <property name="width">16.6%</property>
+            </column>
+            <column id="8373">
+                <property name="width">16.6%</property>
+            </column>
+            <column id="8374">
+                <property name="width">15%</property>
+            </column>
+            <column id="8390">
+                <property name="width">16.6%</property>
+            </column>
+            <row id="8375">
+                <cell id="8376">
+                    <grid id="2855">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2856"/>
+                        <row id="2857">
+                            <cell id="2858">
+                                <label id="2859">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0px</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0px</property>
+                                    <property name="paddingRight">0px</property>
+                                    <text-property name="text">Total Documents</text-property>
+                                </label>
+                                <grid id="2861">
+                                    <property name="backgroundColor">#7AB8D3</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="height">150px</property>
+                                    <column id="2862"/>
+                                    <row id="2863">
+                                        <cell id="2864">
+                                            <property name="verticalAlign">middle</property>
+                                            <table name="Total Docs" id="8377">
+                                                <property name="verticalAlign">middle</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">doc_id</property>
+                                                        <text-property name="displayName">Internal Document ID</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">Total Docs_All</property>
+                                                        <expression name="expression" type="javascript">measure["Total Docs"]</expression>
+                                                        <property name="dataType">integer</property>
+                                                        <simple-property-list name="aggregateOn">
+                                                            <value>All</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="linkedDataModel">GDPR Data Model</property>
+                                                <column id="3145"/>
+                                                <footer>
+                                                    <row id="3143">
+                                                        <property name="verticalAlign">middle</property>
+                                                        <cell id="3144">
+                                                            <property name="verticalAlign">middle</property>
+                                                            <data id="3146">
+                                                                <property name="fontSize">45px</property>
+                                                                <property name="fontWeight">bold</property>
+                                                                <property name="color">white</property>
+                                                                <property name="paddingTop">0px</property>
+                                                                <property name="paddingLeft">0px</property>
+                                                                <property name="paddingBottom">0px</property>
+                                                                <property name="paddingRight">0px</property>
+                                                                <structure name="numberFormat">
+                                                                    <property name="category">Fixed</property>
+                                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                </structure>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="bookmark" type="javascript">"ClearFilter"</expression>
+                                                                <property name="resultSetColumn">Total Docs_All</property>
+                                                            </data>
+                                                        </cell>
+                                                    </row>
+                                                </footer>
+                                            </table>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="3122">
+                    <grid id="2871">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2872"/>
+                        <row id="2873">
+                            <cell id="2874">
+                                <label id="2875">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0px</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0px</property>
+                                    <property name="paddingRight">0px</property>
+                                    <text-property name="text">SSNs</text-property>
+                                </label>
+                                <grid id="2876">
+                                    <property name="backgroundColor">#E88594</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="height">150px</property>
+                                    <column id="2877"/>
+                                    <row id="2878">
+                                        <cell id="2879">
+                                            <property name="verticalAlign">middle</property>
+                                            <table name="Total SSN" id="3155">
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">doc_id</property>
+                                                        <text-property name="displayName">Internal Document ID</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">Total Docs_All</property>
+                                                        <expression name="expression">measure["Total Docs - SSN"]</expression>
+                                                        <property name="dataType">integer</property>
+                                                        <simple-property-list name="aggregateOn">
+                                                            <value>All</value>
+                                                        </simple-property-list>
+                                                        <property name="allowExport">true</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="linkedDataModel">GDPR Data Model</property>
+                                                <column id="3159"/>
+                                                <footer>
+                                                    <row id="8378">
+                                                        <property name="verticalAlign">middle</property>
+                                                        <cell id="3157">
+                                                            <data id="8379">
+                                                                <property name="fontSize">45px</property>
+                                                                <property name="fontWeight">bold</property>
+                                                                <property name="color">white</property>
+                                                                <property name="paddingTop">0px</property>
+                                                                <property name="paddingLeft">0px</property>
+                                                                <property name="paddingBottom">0px</property>
+                                                                <property name="paddingRight">0px</property>
+                                                                <structure name="numberFormat">
+                                                                    <property name="category">Fixed</property>
+                                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                </structure>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="bookmark" type="javascript">"SSNFilter"</expression>
+                                                                <property name="resultSetColumn">Total Docs_All</property>
+                                                            </data>
+                                                        </cell>
+                                                    </row>
+                                                </footer>
+                                            </table>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="3123">
+                    <grid id="2881">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2882"/>
+                        <row id="2883">
+                            <cell id="2884">
+                                <label id="2885">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0px</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0px</property>
+                                    <property name="paddingRight">0px</property>
+                                    <text-property name="text">Passports</text-property>
+                                </label>
+                                <grid id="2886">
+                                    <property name="backgroundColor">#E88594</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="height">150px</property>
+                                    <column id="2887"/>
+                                    <row id="2888">
+                                        <cell id="2889">
+                                            <property name="verticalAlign">middle</property>
+                                            <table name="Total Passport" id="3160">
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">doc_id</property>
+                                                        <text-property name="displayName">Internal Document ID</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">Total Docs_All</property>
+                                                        <expression name="expression">measure["Total Docs - Passport"]</expression>
+                                                        <property name="dataType">integer</property>
+                                                        <simple-property-list name="aggregateOn">
+                                                            <value>All</value>
+                                                        </simple-property-list>
+                                                        <property name="allowExport">true</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="linkedDataModel">GDPR Data Model</property>
+                                                <column id="8383"/>
+                                                <footer>
+                                                    <row id="8380">
+                                                        <property name="verticalAlign">middle</property>
+                                                        <cell id="8381">
+                                                            <data id="8382">
+                                                                <property name="fontSize">45px</property>
+                                                                <property name="fontWeight">bold</property>
+                                                                <property name="color">white</property>
+                                                                <property name="paddingTop">0px</property>
+                                                                <property name="paddingLeft">0px</property>
+                                                                <property name="paddingBottom">0px</property>
+                                                                <property name="paddingRight">0px</property>
+                                                                <structure name="numberFormat">
+                                                                    <property name="category">Fixed</property>
+                                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                </structure>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="bookmark" type="javascript">"PassportFilter"</expression>
+                                                                <property name="resultSetColumn">Total Docs_All</property>
+                                                            </data>
+                                                        </cell>
+                                                    </row>
+                                                </footer>
+                                            </table>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="8384">
+                    <grid id="2904">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2905"/>
+                        <row id="2906">
+                            <cell id="2907">
+                                <label id="2908">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0px</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0px</property>
+                                    <property name="paddingRight">0px</property>
+                                    <text-property name="text">Credit Cards</text-property>
+                                </label>
+                                <grid id="2909">
+                                    <property name="backgroundColor">#E88594</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="height">150px</property>
+                                    <column id="2910"/>
+                                    <row id="2911">
+                                        <cell id="2912">
+                                            <property name="verticalAlign">middle</property>
+                                            <table name="Total Credit Card" id="3165">
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">doc_id</property>
+                                                        <text-property name="displayName">Internal Document ID</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">Total Docs_All</property>
+                                                        <expression name="expression">measure["Total Docs - Credit Card"]</expression>
+                                                        <property name="dataType">integer</property>
+                                                        <simple-property-list name="aggregateOn">
+                                                            <value>All</value>
+                                                        </simple-property-list>
+                                                        <property name="allowExport">true</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="linkedDataModel">GDPR Data Model</property>
+                                                <column id="3169"/>
+                                                <footer>
+                                                    <row id="3166">
+                                                        <property name="verticalAlign">middle</property>
+                                                        <cell id="3167">
+                                                            <data id="3168">
+                                                                <property name="fontSize">45px</property>
+                                                                <property name="fontWeight">bold</property>
+                                                                <property name="color">white</property>
+                                                                <property name="paddingTop">0px</property>
+                                                                <property name="paddingLeft">0px</property>
+                                                                <property name="paddingBottom">0px</property>
+                                                                <property name="paddingRight">0px</property>
+                                                                <structure name="numberFormat">
+                                                                    <property name="category">Fixed</property>
+                                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                </structure>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="bookmark" type="javascript">"CCFilter"</expression>
+                                                                <property name="resultSetColumn">Total Docs_All</property>
+                                                            </data>
+                                                        </cell>
+                                                    </row>
+                                                </footer>
+                                            </table>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="3125">
+                    <grid id="2919">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2920"/>
+                        <row id="2921">
+                            <cell id="2922">
+                                <label id="8385">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0px</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0px</property>
+                                    <property name="paddingRight">0px</property>
+                                    <text-property name="text">Bank Accounts</text-property>
+                                </label>
+                                <grid id="2924">
+                                    <property name="backgroundColor">#E3B26F</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="height">150px</property>
+                                    <column id="2925"/>
+                                    <row id="2926">
+                                        <cell id="2927">
+                                            <property name="verticalAlign">middle</property>
+                                            <table name="Total Bank Account" id="3170">
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">doc_id</property>
+                                                        <text-property name="displayName">Internal Document ID</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">Total Docs_All</property>
+                                                        <expression name="expression">measure["Total Docs - Bank Account"]</expression>
+                                                        <property name="dataType">integer</property>
+                                                        <simple-property-list name="aggregateOn">
+                                                            <value>All</value>
+                                                        </simple-property-list>
+                                                        <property name="allowExport">true</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="linkedDataModel">GDPR Data Model</property>
+                                                <column id="3174"/>
+                                                <footer>
+                                                    <row id="3171">
+                                                        <property name="verticalAlign">middle</property>
+                                                        <cell id="3172">
+                                                            <data id="8386">
+                                                                <property name="fontSize">45px</property>
+                                                                <property name="fontWeight">bold</property>
+                                                                <property name="color">white</property>
+                                                                <property name="paddingTop">0px</property>
+                                                                <property name="paddingLeft">0px</property>
+                                                                <property name="paddingBottom">0px</property>
+                                                                <property name="paddingRight">0px</property>
+                                                                <structure name="numberFormat">
+                                                                    <property name="category">Fixed</property>
+                                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                </structure>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="bookmark" type="javascript">"BankAccountFilter"</expression>
+                                                                <property name="resultSetColumn">Total Docs_All</property>
+                                                            </data>
+                                                        </cell>
+                                                    </row>
+                                                </footer>
+                                            </table>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="8389">
+                    <grid id="8391">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="8392"/>
+                        <row id="8393">
+                            <cell id="8394">
+                                <label id="8395">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0px</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0px</property>
+                                    <property name="paddingRight">0px</property>
+                                    <text-property name="text">Drivers Licenses</text-property>
+                                </label>
+                                <grid id="8396">
+                                    <property name="backgroundColor">#E3B26F</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="height">150px</property>
+                                    <column id="8397"/>
+                                    <row id="8398">
+                                        <cell id="8399">
+                                            <property name="verticalAlign">middle</property>
+                                            <table name="Total Drivers License" id="8400">
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">doc_id</property>
+                                                        <text-property name="displayName">Internal Document ID</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">Total Docs_All</property>
+                                                        <expression name="expression">measure["Total Docs - Drivers License"]</expression>
+                                                        <property name="dataType">integer</property>
+                                                        <simple-property-list name="aggregateOn">
+                                                            <value>All</value>
+                                                        </simple-property-list>
+                                                        <property name="allowExport">true</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="linkedDataModel">GDPR Data Model</property>
+                                                <column id="8404"/>
+                                                <footer>
+                                                    <row id="8401">
+                                                        <property name="verticalAlign">middle</property>
+                                                        <cell id="8402">
+                                                            <data id="8403">
+                                                                <property name="fontSize">45px</property>
+                                                                <property name="fontWeight">bold</property>
+                                                                <property name="color">white</property>
+                                                                <property name="paddingTop">0px</property>
+                                                                <property name="paddingLeft">0px</property>
+                                                                <property name="paddingBottom">0px</property>
+                                                                <property name="paddingRight">0px</property>
+                                                                <structure name="numberFormat">
+                                                                    <property name="category">Fixed</property>
+                                                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                </structure>
+                                                                <property name="textAlign">center</property>
+                                                                <expression name="bookmark" type="javascript">"BankAccountFilter"</expression>
+                                                                <property name="resultSetColumn">Total Docs_All</property>
+                                                            </data>
+                                                        </cell>
+                                                    </row>
+                                                </footer>
+                                            </table>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <label id="8387">
+            <property name="fontSize">8px</property>
+        </label>
+        <grid id="2826">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="fontFamily">"Titillium Web"</property>
+            <property name="fontSize">16px</property>
+            <column id="2828">
+                <property name="width">10px</property>
+            </column>
+            <column id="2898"/>
+            <column id="3115">
+                <property name="width">10px</property>
+            </column>
+            <row id="2832">
+                <cell id="2834"/>
+                <cell id="2895">
+                    <label id="2923">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingTop">0px</property>
+                        <property name="paddingLeft">0px</property>
+                        <property name="paddingBottom">2px</property>
+                        <property name="paddingRight">0px</property>
+                        <text-property name="text">Documents</text-property>
+                    </label>
+                </cell>
+                <cell id="3114"/>
+            </row>
+            <row id="3116">
+                <cell id="3117"/>
+                <cell id="3118">
+                    <table name="DocumentsTable" id="3120">
+                        <property name="fontSize">10px</property>
+                        <property name="pageBreakAfter">avoid</property>
+                        <property name="pageBreakBefore">avoid</property>
+                        <property name="pageBreakInside">avoid</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">doc_id</property>
+                                <text-property name="displayName">Internal Document ID</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">doc_date</property>
+                                <text-property name="displayName">Creation Date</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["doc_date"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">Document Name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">Document ID</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tone</property>
+                                <text-property name="displayName">Tone</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["tone"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">language</property>
+                                <text-property name="displayName">Language</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["language"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">content_type</property>
+                                <text-property name="displayName">Content Type</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["content_type"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_person_count</property>
+                                <text-property name="displayName">pii_person_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_person_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_location_count</property>
+                                <text-property name="displayName">pii_location_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_location_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_address_count</property>
+                                <text-property name="displayName">pii_address_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_address_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_phone_count</property>
+                                <text-property name="displayName">pii_phone_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_phone_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_email_count</property>
+                                <text-property name="displayName">pii_email_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_email_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_driverslicense_count</property>
+                                <text-property name="displayName">pii_driverslicense_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_driverslicense_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_bankaccount_count</property>
+                                <text-property name="displayName">pii_bankaccount_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_bankaccount_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_creditcard_count</property>
+                                <text-property name="displayName">pii_creditcard_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_creditcard_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_passport_count</property>
+                                <text-property name="displayName">pii_passport_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_passport_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pii_ssn_count</property>
+                                <text-property name="displayName">pii_ssn_count</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["pii_ssn_count"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">PII Risk Level</property>
+                                <text-property name="displayName">PII Risk Level</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PII Risk"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">normalized_file_type</property>
+                                <text-property name="displayName">Filetype</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["normalized_file_type"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">content_stream_length</property>
+                                <text-property name="displayName">Content Stream Length</text-property>
+                                <expression name="expression" type="javascript">theFilesize = Math.ceil((dataSetRow["content_stream_length"] / 1024));&#13;
+&#13;
+if (theFilesize > 1000) (theFilesize / 1024).toFixed(1) + ' MB';&#13;
+else theFilesize + ' KB';</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">object_id</property>
+                                <text-property name="displayName">ObjectID</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["object_id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">PII Risk Number</property>
+                                <text-property name="displayName">PII Risk Number</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PII Risk Level"]</expression>
+                                <property name="dataType">integer</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">random_content_type</property>
+                                <text-property name="displayName">random_content_type</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["random_content_type"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <property name="linkedDataModel">GDPR Data Model</property>
+                        <property name="pageBreakInterval">0</property>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">row["PII Risk Number"]</expression>
+                                <property name="direction">desc</property>
+                                <property name="strength">2</property>
+                            </structure>
+                            <structure>
+                                <expression name="key" type="javascript">row["id"]</expression>
+                                <property name="direction">asc</property>
+                                <property name="strength">2</property>
+                            </structure>
+                        </list-property>
+                        <column id="3215"/>
+                        <column id="3216"/>
+                        <column id="3221"/>
+                        <column id="3231"/>
+                        <column id="3279"/>
+                        <column id="8460"/>
+                        <header>
+                            <row id="3121">
+                                <property name="textAlign">left</property>
+                                <cell id="3124">
+                                    <text id="845">
+                                        <property name="fontFamily">monospace</property>
+                                        <property name="fontSize">8pt</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<script>
+var allRows = $('tr[id*="docdetail_"]');
+
+
+allRows
+  .on("mouseover", function() {	
+	$(this).css("background","#D1D1D1");
+	$(this).css("cursor","pointer");	
+  })
+  .on("mouseout", function() {
+	allRows.css("background-color", "");   
+	$(this).css("cursor",""); 
+  })
+  .on("contextmenu", function(ev) {
+	//ev.preventDefault();
+	
+	//
+	//
+	//window.open("http://www.opentextdemo.ca:8085/servlets/redactNode?UPDATE_CS=true&amp;NODE_ID="+objID, "_blank"); 
+	
+	//window.open("http://23.100.92.186:8085/servlets/redactNode?UPDATE_CS=true&amp;NODE_ID="+objID, "_blank"); 
+	//window.open("http://23.100.92.186:8085/servlets/redactNode?UPDATE_CS=true&amp;NODE_ID=4886462", "_blank"); 
+	
+	//alert('Workflow to redact critical information submitted to OpenText Transformation Service.');
+	//
+    return false;
+  })
+  .on("click", function() {
+  		//alert($(this).html());
+	
+		// debugger;		
+		var source = $(this)[0].cells[4].children[1].innerHTML;		
+		if (source == 'Content Server') {
+			$(this).css("background-color", "#AAA");  
+			objID = $(this)[0].id.split("_")[2];
+			window.open("http://vm-xxian.eastasia.cloudapp.azure.com:8980/otcs/cs.exe/app/nodes/"+objID, "_blank"); 
+		}  
+		else {
+			alert('Document viewing from ' + source + ': to be implemented')
+		}		
+		
+  });
+  
+  
+function filterBy(docID) {	
+	$("#popupDetail").show();
+
+	myHTML = $("#popupDetail").html();
+
+	if ( isEnterprise ) 
+	{
+	   $("#popupDetail").html(myHTML + "<br><iframe id=myFrame frameBorder=0 scrolling=yes width=1100px height=690px src='/iportal/executereport.do?__locale=en_US&amp;amp;__userenv=null&amp;amp;__vp=Default%20Volume&amp;amp;volume=Default%20Volume&amp;amp;closex=true&amp;amp;__executableName=%2FApplications%2FPII%20Demo%202020%2FReport%20Designs%2FDocumentDetail.rptdesign&amp;amp;__requesttype=immediate&amp;amp;invokesubmit=true&amp;amp;__format=html&amp;amp;pDocID="+docID+"'></iframe>"); 
+	}
+	else {     // 'Workgroup' in the Designer	   
+	   $("#popupDetail").html(myHTML + "<br><iframe id=myFrame frameBorder=0 scrolling=yes width=1100px height=690px src='/iportal/executereport.do?__locale=en_US&amp;__executableName=E%3a%2fworkspace%2fPII%20Demo%202020%2fReport%20Designs%2fDocumentDetail%2erptdesign&amp;amp;invokesubmit=true&amp;amp;__requesttype=immediate&amp;amp;amp;invokesubmit=true&amp;amp;__requesttype=immediate&amp;amp;__format=html&amp;amp;pDocID="+docID+"'></iframe>");
+	}
+	
+	$("#popupDetail").fadeIn('slow');
+
+}  
+</script>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="3126"/>
+                                <cell id="3136"/>
+                                <cell id="3156"/>
+                                <cell id="3274"/>
+                                <cell id="8455"/>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="3232">
+                                <property name="backgroundColor">#EFEFEF</property>
+                                <property name="height">4px</property>
+                                <cell id="3233">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                </cell>
+                                <cell id="3275"/>
+                                <cell id="8456"/>
+                            </row>
+                            <row id="3261">
+                                <expression name="bookmark" type="javascript">"docdetail_" + row["object_id"]</expression>
+                                <property name="backgroundColor">white</property>
+                                <property name="verticalAlign">middle</property>
+                                <property name="height">50px</property>
+                                <cell id="3262">
+                                    <text id="3266">
+                                        <property name="paddingTop">0px</property>
+                                        <property name="paddingLeft">6px</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <property name="paddingRight">0px</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<span style='height: 20px;width: 20px; border-radius: 50%;  display: inline-block; background-color: <VALUE-OF>switch(row["PII Risk Level"]) {
+  case 'High': '#e88594'; break;
+  case 'Medium': '#e3b26f'; break;
+  case 'Low': '#86e4b2'; break;
+  default: '#E2E2F1';
+}</VALUE-OF>'  title="<VALUE-OF>switch(row["PII Risk Level"]) {
+  case 'High': 'High'; break;
+  case 'Medium': 'Medium'; break;
+  case 'Low': 'Low'; break;
+  default: 'None';
+}</VALUE-OF>"> &amp;nbsp; </span>
+  ]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="3263">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <label id="3127">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingTop">0px</property>
+                                        <property name="paddingLeft">0px</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <property name="paddingRight">0px</property>
+                                        <text-property name="text">File Name</text-property>
+                                    </label>
+                                    <table id="8427">
+                                        <property name="marginTop">3pt</property>
+                                        <property name="canShrink">true</property>
+                                        <column id="8440"/>
+                                        <column id="8441">
+                                            <property name="textAlign">left</property>
+                                        </column>
+                                        <column id="8442">
+                                            <property name="textAlign">left</property>
+                                        </column>
+                                        <column id="8447">
+                                            <property name="textAlign">left</property>
+                                        </column>
+                                        <column id="8444">
+                                            <property name="textAlign">left</property>
+                                        </column>
+                                        <detail>
+                                            <row id="8432">
+                                                <cell id="8433">
+                                                    <data id="3164">
+                                                        <property name="fontSize">14px</property>
+                                                        <property name="fontWeight">600</property>
+                                                        <property name="textAlign">left</property>
+                                                        <property name="resultSetColumn">name</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="8434">
+                                                    <extended-item extensionName="HTMLButton" name="Redact" id="8405">
+                                                        <method name="clientScripts"><![CDATA[
+/**
+ * Occurs when mouse clicks.
+ * @param event
+ */
+
+this.onclick = function(event) { 	
+	window.open("http://vm-xxian.eastasia.cloudapp.azure.com:8085/servlets/redactNode?UPDATE_CS=true&amp;NODE_ID="+objID, "_blank"); 
+	//window.open("http://23.100.92.186:8085/servlets/redactNode?UPDATE_CS=true&amp;NODE_ID=4886462", "_blank");
+	event.stopPropagation(); 
+	alert('Workflow to redact critical information submitted to OpenText Transformation Service.');		
+}
+]]></method>
+                                                        <expression name="text" type="constant">Redact</expression>
+                                                        <property name="toolTip">redact document</property>
+                                                        <property name="textAlign">left</property>
+                                                        <property name="marginLeft">6pt</property>
+                                                        <list-property name="visibility">
+                                                            <structure>
+                                                                <property name="format">all</property>
+                                                                <expression name="valueExpr" type="javascript">if (row["random_content_type"] == 'Content Server' &amp;&amp; (row["pii_bankaccount_count"] > 0 || row["pii_creditcard_count"] > 0 || row["pii_driverslicense_count"] > 0 || row["pii_passport_count"] > 0 || row["pii_ssn_count"] > 0)) &#13;
+	false&#13;
+else &#13;
+	true</expression>
+                                                            </structure>
+                                                        </list-property>
+                                                    </extended-item>
+                                                </cell>
+                                                <cell id="8435">
+                                                    <extended-item extensionName="HTMLButton" name="Roll Back" id="8414">
+                                                        <method name="clientScripts"><![CDATA[
+/**
+ * Occurs when mouse clicks.
+ * @param event
+ */
+
+this.onclick = function(event)
+{ 
+	window.open("http://vm-xxian.eastasia.cloudapp.azure.com:8085/servlets/rollbackNode?NODE_ID="+objID, "_blank"); 
+	event.stopPropagation(); 
+	alert('Workflow to roll back redacted critical information submitted to OpenText Transformation Service.');
+}
+]]></method>
+                                                        <expression name="text" type="constant">Roll Back</expression>
+                                                        <property name="toolTip">roll back redacted document</property>
+                                                        <property name="marginLeft">2pt</property>
+                                                        <list-property name="visibility">
+                                                            <structure>
+                                                                <property name="format">all</property>
+                                                                <expression name="valueExpr" type="javascript">if (row["random_content_type"] == 'Content Server' &amp;&amp; (row["pii_bankaccount_count"] > 0 || row["pii_creditcard_count"] > 0 || row["pii_driverslicense_count"] > 0 || row["pii_passport_count"] > 0 || row["pii_ssn_count"] > 0)) &#13;
+	false&#13;
+else &#13;
+	true</expression>
+                                                            </structure>
+                                                        </list-property>
+                                                    </extended-item>
+                                                </cell>
+                                                <cell id="8446">
+                                                    <extended-item extensionName="HTMLButton" name="Move" id="8448">
+                                                        <method name="clientScripts"><![CDATA[
+/**
+ * Occurs when mouse clicks.
+ * @param event
+ */
+
+this.onclick = function(event)
+{ 
+	parentID = '4886100';
+	//window.open("http://vm-xxian.eastasia.cloudapp.azure.com:8085/servlets/moveNode?NODE_ID="+objID+"&amp;PARENT_NODE_ID="+parentID, "_blank"); 
+	event.stopPropagation(); 
+	//alert('Workflow to delete document submitted to OpenText Transformation Service.');
+	alert('This document remediation function is temporarily disabled for security reason.');
+}
+]]></method>
+                                                        <expression name="text" type="constant">Move</expression>
+                                                        <property name="toolTip">move document to a different location</property>
+                                                        <property name="marginLeft">2pt</property>
+                                                        <list-property name="visibility">
+                                                            <structure>
+                                                                <property name="format">all</property>
+                                                                <expression name="valueExpr" type="javascript">if (row["random_content_type"] == 'Content Server' &amp;&amp; (row["pii_bankaccount_count"] > 0 || row["pii_creditcard_count"] > 0 || row["pii_driverslicense_count"] > 0 || row["pii_passport_count"] > 0 || row["pii_ssn_count"] > 0)) &#13;
+	false&#13;
+else &#13;
+	true</expression>
+                                                            </structure>
+                                                        </list-property>
+                                                    </extended-item>
+                                                </cell>
+                                                <cell id="8443">
+                                                    <extended-item extensionName="HTMLButton" name="Delete" id="8445">
+                                                        <method name="clientScripts"><![CDATA[
+/**
+ * Occurs when mouse clicks.
+ * @param event
+ */
+
+this.onclick = function(event)
+{ 
+	//window.open("http://vm-xxian.eastasia.cloudapp.azure.com:8085/servlets/deleteNode?NODE_ID="+objID, "_blank"); 
+	event.stopPropagation(); 
+	//alert('Workflow to delete document submitted to OpenText Transformation Service.');
+	alert('This document remediation function is temporarily disabled for security reason.');
+}
+]]></method>
+                                                        <expression name="text" type="constant">Delete</expression>
+                                                        <property name="toolTip">delete document</property>
+                                                        <property name="marginLeft">2pt</property>
+                                                        <list-property name="visibility">
+                                                            <structure>
+                                                                <property name="format">all</property>
+                                                                <expression name="valueExpr" type="javascript">if (row["random_content_type"] == 'Content Server' &amp;&amp; (row["pii_bankaccount_count"] > 0 || row["pii_creditcard_count"] > 0 || row["pii_driverslicense_count"] > 0 || row["pii_passport_count"] > 0 || row["pii_ssn_count"] > 0)) &#13;
+	false&#13;
+else &#13;
+	true</expression>
+                                                            </structure>
+                                                        </list-property>
+                                                    </extended-item>
+                                                </cell>
+                                            </row>
+                                        </detail>
+                                    </table>
+                                </cell>
+                                <cell id="3270">
+                                    <label id="3271">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingTop">0px</property>
+                                        <property name="paddingLeft">0px</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <property name="paddingRight">0px</property>
+                                        <text-property name="text">File Type</text-property>
+                                    </label>
+                                    <data id="3273">
+                                        <property name="paddingTop">3pt</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">normalized_file_type</property>
+                                    </data>
+                                </cell>
+                                <cell id="3276">
+                                    <label id="3280">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingTop">0px</property>
+                                        <property name="paddingLeft">0px</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <property name="paddingRight">10px</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">File Size</text-property>
+                                    </label>
+                                    <data id="3282">
+                                        <property name="paddingTop">3pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1px</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">content_stream_length</property>
+                                    </data>
+                                </cell>
+                                <cell id="8457">
+                                    <label id="8464">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingTop">0px</property>
+                                        <property name="paddingLeft">0px</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <property name="paddingRight">10px</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">File Source</text-property>
+                                    </label>
+                                    <data id="8463">
+                                        <property name="paddingTop">3pt</property>
+                                        <property name="paddingRight">10pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">random_content_type</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="3158">
+                                <property name="verticalAlign">top</property>
+                                <property name="height">50px</property>
+                                <cell id="3161"/>
+                                <cell id="3163">
+                                    <label id="3267">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <text-property name="text">Create Date</text-property>
+                                    </label>
+                                    <data id="3162">
+                                        <property name="paddingTop">3pt</property>
+                                        <structure name="dateTimeFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">MM/dd/yyyy</property>
+                                        </structure>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">doc_date</property>
+                                    </data>
+                                </cell>
+                                <cell id="3173">
+                                    <label id="3268">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingBottom">0px</property>
+                                        <text-property name="text">PII Types</text-property>
+                                    </label>
+                                    <label id="8388">
+                                        <property name="paddingTop">3pt</property>
+                                        <property name="textAlign">left</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">true</expression>
+                                            </structure>
+                                        </list-property>
+                                        <text-property name="text">Details</text-property>
+                                        <list-property name="action">
+                                            <structure>
+                                                <property name="linkType">drill-through</property>
+                                                <property name="toolTip">Click to show details</property>
+                                                <property name="reportName">DocumentDetail.rptdesign</property>
+                                                <property name="targetWindow">_blank</property>
+                                                <property name="targetFileType">report-design</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">pDocID</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">row["object_id"]</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                            </structure>
+                                        </list-property>
+                                    </label>
+                                    <text id="3260">
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<a id="<VALUE-OF>row["object_id"]</VALUE-OF>" href="javascript:filterBy(<VALUE-OF>row["object_id"]</VALUE-OF>);" style="cursor:pointer; text-decoration:none;">
+<img src='<VALUE-OF>if (row["pii_address_count"] > 0 || row["pii_location_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/Address.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/Address-OFF.png';</VALUE-OF>' title='Address/Location'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_bankaccount_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/Bank.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/BankOFF.png';</VALUE-OF>' title='Bank Account'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_creditcard_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/CC.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/CCOFF.png';</VALUE-OF>' title='Credit Card'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_driverslicense_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/Drivers-License.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/Drivers-License-OFF.png';</VALUE-OF>' title="Driver's License"></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_email_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/Email.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/EmailOFF.png';</VALUE-OF>' title='Email Address'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_passport_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/Passport.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/Passport-OFF.png';</VALUE-OF>' title='Passport'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_person_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/People.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/People-OFF.png';</VALUE-OF>' title='People'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_phone_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/Phone.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/PhoneOFF.png';</VALUE-OF>' title='Phone'></img>
+
+&amp;nbsp;
+<img src='<VALUE-OF>if (row["pii_ssn_count"] > 0) 'https://td-mag.eimdemo.com/PIIDemo2020/images/SSN.png';
+else 'https://td-mag.eimdemo.com/PIIDemo2020/images/SSNOFF.png';</VALUE-OF>' title='SSN'></img>
+</a>
+
+<script>
+$('a[id*="<VALUE-OF>row["object_id"]</VALUE-OF>"]').on("click", function() {
+  	filterBy("<VALUE-OF>row["object_id"]</VALUE-OF>");
+});
+</script>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="3193"/>
+                                <cell id="3277"/>
+                                <cell id="8458"/>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="3195">
+                                <cell id="3197"/>
+                                <cell id="3198"/>
+                                <cell id="3203"/>
+                                <cell id="3213"/>
+                                <cell id="3278"/>
+                                <cell id="8459"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+                <cell id="3119"/>
+            </row>
+        </grid>
+        <text id="3748">
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<script>
+	$('div[id*="topTextHeading"]').attr('style', 'font-size:20px !important');
+	$('table[id*="rounded"]').css("border-width","2px").css("border-collapse","separate").css("border-radius","6px");
+	$('table[element_type="Grid"]').css("border-width","4px").css("border-collapse","separate").css("border-radius","6px");
+</script>]]></text-property>
+        </text>
+    </body>
+</report>

@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202004021542</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <method name="onContentUpdate"><![CDATA[vwrRptName = this.getViewer().getReportName();
+
+
+if (window["__first_load"] === undefined) {
+    window["__first_load"] = true;
+
+    uiOpts = new actuate.viewer.UIOptions();
+    //Remove "Enable Interactivity" menu option
+    //uiOpts.enableEditReport(false);
+    
+    //diable report export menu item
+    //uiOpts.enableExportReport(false);
+    
+    //disable toolbar
+    uiOpts.enableToolBar(false);
+                
+    //disable viewer right-click context menus
+    //uiOpts.enableToolbarContextMenu(false);
+    
+    this.getViewer().setUIOptions(uiOpts);
+	
+}]]></method>
+    <parameters>
+        <scalar-parameter name="pRiskLevel" id="2936">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <data-mart-data-source name="Text Analytics Data Source" id="4">
+            <property name="datamartURL">Data Objects/Text Analytics for GDPR</property>
+            <property name="accessType">latest</property>
+        </data-mart-data-source>
+    </data-sources>
+    <property name="linkedDataModels">
+        <data-mart-linked-data-model name="GDPR Data Model" id="5">
+            <property name="dataSource">Text Analytics Data Source</property>
+            <property name="dataObject">GDPR Data Model</property>
+        </data-mart-linked-data-model>
+        <data-mart-linked-data-model name="GDPR Data Model File Type" id="3213">
+            <property name="dataSource">Text Analytics Data Source</property>
+            <property name="dataObject">GDPR Data Model File Type</property>
+        </data-mart-linked-data-model>
+    </property>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">auto</property>
+            <property name="backgroundColor">#EFEFEF</property>
+            <property name="headerHeight">1px</property>
+            <property name="footerHeight">1px</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="2826">
+            <property name="fontFamily">"Titillium Web"</property>
+            <property name="fontSize">16px</property>
+            <expression name="bookmark" type="javascript">'main_dashboard'</expression>
+            <column id="2827">
+                <property name="width">252px</property>
+            </column>
+            <column id="2828">
+                <property name="width">15px</property>
+            </column>
+            <column id="2829"/>
+            <column id="2830"/>
+            <column id="2831"/>
+            <column id="2894"/>
+            <column id="2898"/>
+            <row id="2832">
+                <cell id="2833">
+                    <grid id="2850">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2851"/>
+                        <row id="2852">
+                            <cell id="2853">
+                                <label id="2854">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">Risk Level</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart" id="13">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;// options.tooltip.shared = true;&#13;&#10;&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;    //options.xAxis.labels.align = &#039;left&#039;;&#13;&#10;    //options.xAxis.labels.reserveSpace = true;&#13;&#10;    //options.xAxis.labels.x = -20;&#13;&#10;    options.xAxis.labels.y = 5;&#13;&#10;    &#13;&#10;    options.series[0].pointWidth = 10;&#13;&#10;    options.series[0].borderRadius = 5;&#13;&#10;        &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = &#039;Level &#039; +this.x + &#039;: &#039; + this.y;&#13;&#10;            //myTooltip = &#039;&lt;b&gt;&#039; + d.toLocaleDateString() + &#039;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;&#039; + this.points[0].series.name + &#039;:&lt;/b&gt; &#039; + this.points[0].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            //myTooltip += &#039;&lt;br&gt;&lt;b&gt;&#039; + this.points[1].series.name + &#039;:&lt;/b&gt; &#039; + this.points[1].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;//  headerFormat: &#039;&lt;div style=&quot; color:#363636;font-size: 16px;font-weight: 400;&quot;&gt;{point.key}&lt;/div&gt;&#039;,&#13;&#10;//  pointFormat: &#039;&lt;div style=&quot; font-size: 12px;font-weight: 600;margin-top: 4px;&quot;&gt;{series.name}: {point.y:,.0f}&lt;/div&gt;&#039;&#13;&#10;    }; &#13;&#10;&#13;&#10;    options.legend.width = 300;&#13;&#10;    &#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;                &#13;&#10;        options.legend.x = 40;&#13;&#10;        &#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;    options.chart.marginTop=0;&#13;&#10;    options.chart.marginLeft=97;&#13;&#10;},"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="6,4,12,8,10"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="0" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;cartidge_count&quot;]">
+       <grouping enabled="true"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <triggers condition="2">
+       <action type="3">
+        <value _type="ScriptValue" script="filterDocTable(&#039;pRiskLevel&#039;,categoryData);"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="0">
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;PII Risk Level&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6" groupType="0"/>
+    <sortKey definition="row[&quot;cartidge_count&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">150px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">PII Risk Level</property>
+                                            <text-property name="displayName">PII Risk Level</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["PII Risk Level"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">cartidge_count</property>
+                                            <text-property name="displayName">cartidge_count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["cartidge_count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="2834"/>
+                <cell id="2835">
+                    <property name="colSpan">5</property>
+                    <property name="rowSpan">7</property>
+                    <text id="3113">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<div id="here"></div>
+
+<script>
+$("<style type='text/css'> .popup_close { float: right; opacity: 0.9; font-size: 16px; font-weight: 800; color: white; cursor: pointer; width: 20px; text-align: center; line-height: 18px;} .popup_close:hover { background-color: white; color: #616375; border-radius: 17px; } .popup_content { display: none; position: absolute;	top: 15%; left: 25%; width: 1100px; height: 700px; padding: 10px; border: 5px solid #B0B1BA; background-color: #616375; z-index:1002; overflow: hidden;}</style>").appendTo("head");
+</script>
+
+<div id="popupDetail" class="popup_content"><span id="popupClose'" class="popup_close" onclick="$('#popupDetail').hide();$('#popupDetail iframe').remove();$('#popupDetail br').remove();$('#popupClose').hide();">&amp;#10006;</span></div>
+<script>	
+
+	$('table[element_type="Grid"]').css("border-width","4px").css("border-collapse","separate").css("border-radius","6px");
+
+vContainer = actuate.getViewer("here").getId();
+$('#' + vContainer + '_ClearFilter').parent().parent().parent().parent().parent().parent().css("cursor","pointer").click( function() { filterDocTable ('ClearFilter',''); });
+$('#' + vContainer + '_SSNFilter').parent().parent().parent().parent().parent().parent().css("cursor","pointer").click( function() { filterDocTable ('pPIIType','SSN'); });
+$('#' + vContainer + '_PassportFilter').parent().parent().parent().parent().parent().parent().css("cursor","pointer").click( function() { filterDocTable ('pPIIType','Passport'); });
+$('#' + vContainer + '_CCFilter').parent().parent().parent().parent().parent().parent().css("cursor","pointer").click( function() { filterDocTable ('pPIIType','Credit Card'); });
+$('#' + vContainer + '_BankAccountFilter').parent().parent().parent().parent().parent().parent().css("cursor","pointer").click( function() { filterDocTable ('pPIIType','Bank Account'); });
+
+	//Open report to be viewed inside a "frame"
+if ((typeof actuate.getViewer("here") === "undefined") || (actuate.getViewer("here") === null)) isEnterprise = true;
+
+else {
+	if (actuate.getViewer("here").getRequestOptions().getRepositoryType() == 'Enterprise') isEnterprise = true;
+	else isEnterprise = false;
+}
+
+if (isEnterprise)
+	var rpt = "/Applications/PII Demo 2020/Report Designs/DocListing.rptdesign";
+else
+	var rpt = "E:/workspace/PII Demo 2020/Report Designs/DocListing.rptdesign";
+
+
+			var panel = new actuate.viewer.BrowserPanel();
+			uiCfg = new actuate.viewer.UIConfig();
+			uiCfg.setContentPanel(panel);
+			var vwr = new actuate.Viewer("acViewer");
+			var uiOptions = new actuate.viewer.UIOptions( );
+			uiOptions.enableToolBar(false);
+			vwr.setUIOptions(uiOptions);
+			//theWidth = $('#container_main_dashboard').width() - 252 - 15;
+			theWidth = $(window).width()- 252 - 15 - 10;
+			//theHeight = $('.floatPanel').height() + 178 + 15;
+			theHeight = $(window).height() + 120;
+			//debugger;
+			vwr.setWidth(theWidth);
+			vwr.setHeight(theHeight);
+			vwr.setReportName(rpt);
+			vwr.submit();
+			
+function filterDocTable(t,e) {
+	switch (t) {
+		case 'ClearFilter' : vwr.setParameters( [ { 'pClassificationType' : '' }, { 'pPIIType' : '' }, { 'pRiskLevel' : null }, { 'pFileSource' : '' } ]  ); break;
+		case 'pClassificationType': vwr.setParameters( { 'pClassificationType' : e } ); break;
+		case 'pPIIType': vwr.setParameters( { 'pPIIType' : e } ); break;
+		case 'pRiskLevel': vwr.setParameters( { 'pRiskLevel' : e } ); break;
+		case 'pFileSource': vwr.setParameters( { 'pFileSource' : e } ); break;
+		default: console.log ("Error in filterDocTable - " + t + ' : ' + e );
+	}		
+	vwr.submit();
+}
+
+</script>
+<div id="acViewer" style="overflow-y:auto;overflow-x:hidden;display:block;margin-top:-24px;"></div>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="8371">
+                <property name="fontSize">12%</property>
+                <property name="height">3px</property>
+                <cell id="8372"/>
+                <cell id="8373"/>
+            </row>
+            <row id="2838">
+                <cell id="2839">
+                    <grid id="2929">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2930"/>
+                        <row id="2931">
+                            <cell id="2932">
+                                <label id="2935">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">Classification Type</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart1" id="2934">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;// options.tooltip.shared = true;&#13;&#10;&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;   options.series[0].pointWidth = 10;&#13;&#10;   &#13;&#10;   options.series[0].pointWidth = 10;&#13;&#10;   options.series[0].borderRadius = 5;&#13;&#10;    &#13;&#10; &#13;&#10;   &#13;&#10;   options.xAxis.labels.y = 5;&#13;&#10;   &#13;&#10;   &#13;&#10;   &#13;&#10;  &#13;&#10;     &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = this.x + &#039;: &#039; + this.y;&#13;&#10;            //myTooltip = &#039;&lt;b&gt;&#039; + d.toLocaleDateString() + &#039;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;&#039; + this.points[0].series.name + &#039;:&lt;/b&gt; &#039; + this.points[0].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            //myTooltip += &#039;&lt;br&gt;&lt;b&gt;&#039; + this.points[1].series.name + &#039;:&lt;/b&gt; &#039; + this.points[1].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;//  headerFormat: &#039;&lt;div style=&quot; color:#363636;font-size: 16px;font-weight: 400;&quot;&gt;{point.key}&lt;/div&gt;&#039;,&#13;&#10;//  pointFormat: &#039;&lt;div style=&quot; font-size: 12px;font-weight: 600;margin-top: 4px;&quot;&gt;{series.name}: {point.y:,.0f}&lt;/div&gt;&#039;&#13;&#10;    }; &#13;&#10;&#13;&#10;    options.legend.width = 300;&#13;&#10;    &#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;            &#13;&#10;        options.legend.x = 40;&#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;  options.chart.marginTop=20;&#13;&#10;},"/>
+  <extendedProperties name="enable.data.summarize" value="false"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="2" labelPosition="1" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;category_count&quot;]">
+       <grouping enabled="true" aggregateExpression="First"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <triggers condition="2">
+       <action type="3">
+        <value _type="ScriptValue" script="filterDocTable(&#039;pClassificationType&#039;,categoryData);"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="0">
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;category&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6" aggregateExpression="First"/>
+    <sortKey definition="row[&quot;category_count&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <list-property name="filter">
+                                        <structure>
+                                            <property name="operator">like</property>
+                                            <expression name="expr" type="javascript">row["kb_name"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">"PersonalInformation%"</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">250px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">category</property>
+                                            <text-property name="displayName">Category</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["category"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">category_count</property>
+                                            <text-property name="displayName">Category Count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["category_count"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">kb_name</property>
+                                            <text-property name="displayName">Knowledgebase Name</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["kb_name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="2840"/>
+            </row>
+            <row id="2844">
+                <property name="fontSize">12px</property>
+                <property name="height">3px</property>
+                <cell id="2845">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                </cell>
+                <cell id="3107"/>
+            </row>
+            <row id="3093">
+                <cell id="3094">
+                    <grid id="3202">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="3203"/>
+                        <row id="3204">
+                            <cell id="3205">
+                                <label id="3206">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">Category Type</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart11" id="3207">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;// options.tooltip.shared = true;&#13;&#10;&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;   options.series[0].pointWidth = 10;&#13;&#10;   &#13;&#10;   options.series[0].pointWidth = 10;&#13;&#10;   options.series[0].borderRadius = 5;&#13;&#10;    &#13;&#10; &#13;&#10;   &#13;&#10;   options.xAxis.labels.y = 5;&#13;&#10;   &#13;&#10;   &#13;&#10;   &#13;&#10;  options.xAxis.plotBands = [&#13;&#10;  &#13;&#10;   { from: 6.5, to: 10, color: &#039;rgba(232, 133, 148, 0.1)&#039;},&#13;&#10;   { from: 4.5, to: 6.5, color: &#039;rgba(227, 178, 111, 0.1)&#039;},&#13;&#10;   { from: -.5, to: 4.5, color: &#039;rgba(134, 228, 178, 0.1)&#039;} &#13;&#10;  &#13;&#10;  &#13;&#10;  &#13;&#10;  ];&#13;&#10;     &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = this.x + &#039;: &#039; + this.y;&#13;&#10;            //myTooltip = &#039;&lt;b&gt;&#039; + d.toLocaleDateString() + &#039;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;&#039; + this.points[0].series.name + &#039;:&lt;/b&gt; &#039; + this.points[0].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            //myTooltip += &#039;&lt;br&gt;&lt;b&gt;&#039; + this.points[1].series.name + &#039;:&lt;/b&gt; &#039; + this.points[1].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;//  headerFormat: &#039;&lt;div style=&quot; color:#363636;font-size: 16px;font-weight: 400;&quot;&gt;{point.key}&lt;/div&gt;&#039;,&#13;&#10;//  pointFormat: &#039;&lt;div style=&quot; font-size: 12px;font-weight: 600;margin-top: 4px;&quot;&gt;{series.name}: {point.y:,.0f}&lt;/div&gt;&#039;&#13;&#10;    }; &#13;&#10;&#13;&#10;    options.legend.width = 300;&#13;&#10;    &#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;            &#13;&#10;        options.legend.x = 40;&#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;  options.chart.marginTop=20;&#13;&#10;},"/>
+  <extendedProperties name="enable.data.summarize" value="false"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="2" labelPosition="1" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;cartidge_count&quot;]">
+       <grouping enabled="true"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <triggers condition="2">
+       <action type="3">
+        <value _type="ScriptValue" script="filterDocTable(&#039;pPIIType&#039;,categoryData);"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="0">
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;Cartridge Type&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6"/>
+    <sortKey definition="row[&quot;cartidge_count&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">275px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">cartidge_count</property>
+                                            <text-property name="displayName">cartidge_count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["cartidge_count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Cartridge Type</property>
+                                            <text-property name="displayName">Cartridge Type</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Cartridge Type"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="3095"/>
+            </row>
+            <row id="3180">
+                <property name="fontSize">12px</property>
+                <property name="height">3px</property>
+                <cell id="3181"/>
+                <cell id="3182"/>
+            </row>
+            <row id="3188">
+                <cell id="3189">
+                    <grid id="3196">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="3197"/>
+                        <row id="3198">
+                            <cell id="3199">
+                                <label id="3200">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">File Source</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart21" id="3201">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0" reverseCategory="true">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;    options.xAxis.labels.y = 5;&#13;&#10;    &#13;&#10;    options.series[0].pointWidth = 10;&#13;&#10;    options.series[0].borderRadius = 5;&#13;&#10;        &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = this.x + &#039;: &#039; + this.y;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;    }; &#13;&#10;&#13;&#10;&#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;                &#13;&#10;        options.legend.x = 40;&#13;&#10;        &#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;    options.chart.marginTop=0;&#13;&#10;    options.chart.marginLeft=97;&#13;&#10;},"/>
+  <extendedProperties name="enable.data.summarize" value="true"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="2" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;total_count&quot;]">
+       <grouping enabled="true" aggregateExpression="First"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <triggers condition="2">
+       <action type="3">
+        <value _type="ScriptValue" script="filterDocTable(&#039;pFileSource&#039;,categoryData);"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="1" sortStrength="2">
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;random_content_type&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6" aggregateExpression="First"/>
+    <sortKey definition="row[&quot;total_count&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">155px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">random_content_type</property>
+                                            <text-property name="displayName">Content Source</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["random_content_type"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">total_count</property>
+                                            <text-property name="displayName">total_count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["total_source_count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">total_count_1</property>
+                                            <text-property name="displayName">total_count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["total_count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model File Type</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="3190"/>
+            </row>
+        </grid>
+    </body>
+</report>

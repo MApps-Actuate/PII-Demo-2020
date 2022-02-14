@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202004021542</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Text Analytics" id="3588">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://mtm203ga:5432/magellan</property>
+            <property name="odaUser">maguser</property>
+            <property name="odaAutoCommit">false</property>
+            <encrypted-property name="odaPassword" encryptionID="jce">ed692c756ac318b4caab65efdde92e0b</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="NodeCounts" id="2356">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">node</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">node</text-property>
+                    <text-property name="heading">node</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">count</text-property>
+                    <text-property name="heading">count</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["node"]</expression>
+                    <simple-property-list name="value1">
+                        <value type="javascript">"DT"</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">node</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var txt = params["pSearch"].value + "";
+//var txtClean = txt.replace(/[.,\/#!$%\^&amp;\*;:{}=\-_`~()\s]/g,"");
+//logger = java.util.logging.Logger.getLogger("birt.report.logger");
+//logger.warning ("!!! " + txt);
+//this.queryText = new Packages.java.lang.String(this.queryText).replaceAll("999", txtClean);
+this.queryText = this.queryText.replaceAll("999", txt);
+//logger.warning ("### " + this.queryText);]]></method>
+            <property name="dataSource">Text Analytics</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">node</property>
+                    <property name="nativeName">node</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">count</property>
+                    <property name="nativeName">count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[(SELECT 'Doc' AS node, count(DISTINCT dma.name) FROM document d, ca_term t, document_metadata_attributes dma 
+WHERE d.doc_id = dma.doc_id	AND d.doc_id = t.doc_id
+AND (dma.name, d.doc_id) IN (SELECT DISTINCT ON (dma.name) dma.name, d.doc_id
+                    		FROM document d, ca_term t, document_metadata_attributes dma 
+    						WHERE d.doc_id = dma.doc_id AND d.doc_id = t.doc_id
+    						AND d.repository_id IN ('7','9','10')
+                    		GROUP BY dma.name, d.doc_id 
+                    		FETCH FIRST 100 ROWS ONLY)
+GROUP BY node)
+  
+UNION
+
+(SELECT t.cartridge AS node, sum(t.frequency) AS total
+    FROM document d, ca_term t, document_metadata_attributes dma 
+    WHERE d.doc_id = t.doc_id AND d.doc_id = dma.doc_id    
+    AND (dma.name, d.doc_id) IN (SELECT DISTINCT ON (dma.name) dma.name, d.doc_id
+                    			FROM document d, ca_term t, document_metadata_attributes dma 
+    							WHERE d.doc_id = dma.doc_id AND d.doc_id = t.doc_id
+    							AND d.repository_id IN ('7','9','10')
+                    			GROUP BY dma.name, d.doc_id 
+                    			FETCH FIRST 100 ROWS ONLY)
+	AND 
+    	case when t.cartridge ='PN' then ((case when t.main_term_value is not null then t.main_term_value else t.normalized_name end) NOT IN ('U. S. Citizen', 'Identification Card', 'Instructions Future Developments', 'Child Abuse', 'Day  Martin Luther King Day', 'Day  Columbus Day', 'William Shakespeare','Floor','Height','Add New','Chat','Line','Alien') and (case when t.main_term_value is not null then t.main_term_value else t.normalized_name end) NOT LIKE ('Declined%')) 
+    	else 
+    		case when t.cartridge ='Phone' then position('0' in (case when t.main_term_value is not null then t.main_term_value else t.normalized_name end)) > 1 
+    		else 
+    			case when t.cartridge ='DriversLicence' then length(case when t.main_term_value is not null then t.main_term_value else t.normalized_name end) >= 7 
+    			else true end
+    		end
+    	end 
+GROUP BY node)]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Nodes" id="2349">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">duplicate</property>
+                    <expression name="expression" type="javascript">false</expression>
+                    <property name="dataType">boolean</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">label</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">label</text-property>
+                    <text-property name="heading">label</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">doc_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">doc_id</text-property>
+                    <text-property name="heading">doc_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">node</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">node</text-property>
+                    <text-property name="heading">node</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total</text-property>
+                    <text-property name="heading">total</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">level</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">level</text-property>
+                    <text-property name="heading">level</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">is-false</property>
+                    <expression name="expr" type="javascript">row["duplicate"]</expression>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["node"]</expression>
+                    <simple-property-list name="value1">
+                        <value type="javascript">"DT"</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">label</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">doc_id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">node</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">total</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">level</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">duplicate</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var txt = params["pSearch"].value + "";
+//var txtClean = txt.replace(/[.,\/#!$%\^&amp;\*;:{}=\-_`~()\s]/g,"");
+//logger = java.util.logging.Logger.getLogger("birt.report.logger");
+//logger.warning ("!!! " + txt);
+//this.queryText = new Packages.java.lang.String(this.queryText).replaceAll("999", txtClean);
+this.queryText = this.queryText.replaceAll("999", txt);
+//logger.warning ("### " + this.queryText);
+docs = {};
+edges = [];
+]]></method>
+            <method name="onFetch"><![CDATA[if (row["level"] > 1) {
+	if (!(row["id"] in docs)) {
+		docs[row["id"]] = row["id"];
+	}
+	else {
+		row["duplicate"] = true;
+	}
+	edges.push("{from: '" + row["doc_id"] + "', to: '" + row["id"].replace(/'/g , "&amp;apos;") + "', value:" + row["total"] + "}");
+}]]></method>
+            <property name="dataSource">Text Analytics</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">label</property>
+                    <property name="nativeName">label</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">doc_id</property>
+                    <property name="nativeName">doc_id</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">node</property>
+                    <property name="nativeName">node</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">total</property>
+                    <property name="nativeName">total</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">level</property>
+                    <property name="nativeName">level</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[(SELECT distinct on (dma.name) dma.name AS label, d.doc_id, 'Doc' AS node, 1 AS total, 
+1 AS level, cast(d.doc_id as varchar) AS id
+    FROM document d, document_metadata_attributes dma 
+    WHERE d.doc_id = dma.doc_id
+    AND (dma.name, d.doc_id) IN (SELECT distinct on (dma.name, d.doc_id) dma.name, d.doc_id
+                         FROM document d, ca_term t, document_metadata_attributes dma 
+                         WHERE d.doc_id = dma.doc_id AND d.doc_id = t.doc_id
+                         AND d.repository_id in ('7','9','10')               
+                         GROUP BY dma.name, d.doc_id
+                         FETCH FIRST 100 ROWS ONLY )    
+    ORDER BY dma.name
+)
+ 
+ UNION
+
+(SELECT case when t.main_term_value is not null then t.main_term_value else t.normalized_name end AS label, d.doc_id, t.cartridge AS node, t.frequency AS total,
+    2 AS level, case when t.main_term_value is not null then t.main_term_value else t.normalized_name end AS id
+    FROM document d, ca_term t, document_metadata_attributes dma
+	WHERE d.doc_id=t.doc_id and d.doc_id = dma.doc_id	
+    AND (dma.name, d.doc_id) IN (SELECT distinct on (dma.name, d.doc_id) dma.name, d.doc_id
+                         FROM document d, ca_term t, document_metadata_attributes dma 
+                         WHERE d.doc_id = dma.doc_id AND d.doc_id = t.doc_id
+                         AND d.repository_id in ('7','9','10')                     
+                         GROUP BY dma.name, d.doc_id
+                         FETCH FIRST 100 ROWS ONLY)                          
+     AND 
+    	case when t.cartridge ='PN' then ((case when t.main_term_value is not null then t.main_term_value else t.normalized_name end) NOT IN ('U. S. Citizen', 'Identification Card', 'Instructions Future Developments', 'Child Abuse', 'Day  Martin Luther King Day', 'Day  Columbus Day', 'William Shakespeare','Floor','Height','Add New','Chat','Line','Alien') and (case when t.main_term_value is not null then t.main_term_value else t.normalized_name end) NOT LIKE ('Declined%')) 
+    	else 
+    		case when t.cartridge ='Phone' then position('0' in (case when t.main_term_value is not null then t.main_term_value else t.normalized_name end)) > 1 
+    		else 
+    			case when t.cartridge ='DriversLicence' then length(case when t.main_term_value is not null then t.main_term_value else t.normalized_name end) >= 7 
+    			else true end
+    		end
+    	end
+)]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>doc_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>50</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>doc_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>doc_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>50</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>label</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>label</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>label</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>node</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>node</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>node</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>total</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>total</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>total</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>level</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>level</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>level</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <property name="linkedDataModels">
+        <linked-data-model name="Data Model" id="3589">
+            <property name="aliasDataSets">
+                <alias-data-set name="NodeCounts" id="3601">
+                    <property name="originDataSet">NodeCounts</property>
+                </alias-data-set>
+                <alias-data-set name="Nodes" id="3602">
+                    <property name="originDataSet">Nodes</property>
+                </alias-data-set>
+            </property>
+            <property name="columnLinks">
+                <column-link id="3603">
+                    <property name="leftAliasDataSet">Data Model/NodeCounts</property>
+                    <property name="rightAliasDataSet">Data Model/Nodes</property>
+                    <property name="columnLinkDetails">
+                        <column-link-detail id="3604">
+                            <structure name="leftColumn">
+                                <property name="position">1</property>
+                                <property name="name">node</property>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure name="rightColumn">
+                                <property name="position">3</property>
+                                <property name="name">node</property>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </column-link-detail>
+                    </property>
+                    <property name="allowPushdown">false</property>
+                </column-link>
+            </property>
+            <property name="categories">
+                <category name="NodeCounts" id="3590">
+                    <property name="categoryColumns">
+                        <category-column name="node" id="3591">
+                            <property name="aliasDataSet">Data Model/NodeCounts</property>
+                            <property name="resultSetColumnName">node</property>
+                        </category-column>
+                        <category-column name="count" id="3592">
+                            <property name="aliasDataSet">Data Model/NodeCounts</property>
+                            <property name="resultSetColumnName">count</property>
+                        </category-column>
+                    </property>
+                </category>
+                <category name="Nodes" id="3593">
+                    <property name="categoryColumns">
+                        <category-column name="label" id="3594">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">label</property>
+                        </category-column>
+                        <category-column name="doc_id" id="3595">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">doc_id</property>
+                        </category-column>
+                        <category-column name="node1" id="3596">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">node</property>
+                        </category-column>
+                        <category-column name="total" id="3597">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">total</property>
+                        </category-column>
+                        <category-column name="level" id="3598">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">level</property>
+                        </category-column>
+                        <category-column name="id" id="3599">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">id</property>
+                        </category-column>
+                        <category-column name="duplicate" id="3600">
+                            <property name="aliasDataSet">Data Model/Nodes</property>
+                            <property name="resultSetColumnName">duplicate</property>
+                        </category-column>
+                    </property>
+                </category>
+            </property>
+            <property name="pushDown">true</property>
+        </linked-data-model>
+    </property>
+</datamart>

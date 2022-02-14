@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201905290745</property>
+    <property name="units">in</property>
+    <method name="clientInitialize"><![CDATA[$("<style type='text/css'> @import url('https://fonts.googleapis.com/css?family=Titillium+Web');</style>").appendTo("head");]]></method>		
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <method name="onContentUpdate"><![CDATA[vwrRptName = this.getViewer().getReportName();
+
+
+if (window["__first_load"] === undefined) {
+    window["__first_load"] = true;
+
+    uiOpts = new actuate.viewer.UIOptions();
+    //Remove "Enable Interactivity" menu option
+    //uiOpts.enableEditReport(false);
+    
+    //diable report export menu item
+    //uiOpts.enableExportReport(false);
+    
+    //disable toolbar
+    uiOpts.enableToolBar(false);
+                
+    //disable viewer right-click context menus
+    //uiOpts.enableToolbarContextMenu(false);
+    
+    this.getViewer().setUIOptions(uiOpts);
+	
+}]]></method>
+    <parameters>
+        <scalar-parameter name="pRiskLevel" id="2936">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <data-mart-data-source name="Text Analytics Data Source" id="4">
+            <property name="datamartURL">Data Objects/Text Analytics for GDPR</property>
+            <property name="accessType">latest</property>
+        </data-mart-data-source>
+    </data-sources>
+    <property name="linkedDataModels">
+        <data-mart-linked-data-model name="GDPR Data Model" id="5">
+            <property name="dataSource">Text Analytics Data Source</property>
+            <property name="dataObject">GDPR Data Model</property>
+        </data-mart-linked-data-model>
+    </property>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">auto</property>
+            <property name="backgroundColor">#EFEFEF</property>
+            <property name="headerHeight">1px</property>
+            <property name="footerHeight">1px</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="2826">
+            <property name="fontFamily">"Titillium Web"</property>
+            <property name="fontSize">16px</property>
+            <expression name="bookmark" type="javascript">'main_dashboard'</expression>
+            <column id="2827">
+                <property name="width">252px</property>
+            </column>
+            <column id="2828">
+                <property name="width">15px</property>
+            </column>
+            <column id="2829"/>
+            <column id="2830"/>
+            <column id="2831"/>
+            <column id="2894"/>
+            <column id="2898"/>
+            <row id="2832">
+                <cell id="2833">
+                    <grid id="2850">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2851"/>
+                        <row id="2852">
+                            <cell id="2853">
+                                <label id="2854">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">Risk Level</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart" id="13">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;// options.tooltip.shared = true;&#13;&#10;&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;    //options.xAxis.labels.align = &#039;left&#039;;&#13;&#10;    //options.xAxis.labels.reserveSpace = true;&#13;&#10;    //options.xAxis.labels.x = -20;&#13;&#10;    options.xAxis.labels.y = 5;&#13;&#10;    &#13;&#10;    options.series[0].pointWidth = 10;&#13;&#10;    options.series[0].borderRadius = 5;&#13;&#10;        &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = &#039;Level &#039; +this.x + &#039;: &#039; + this.y;&#13;&#10;            //myTooltip = &#039;&lt;b&gt;&#039; + d.toLocaleDateString() + &#039;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;&#039; + this.points[0].series.name + &#039;:&lt;/b&gt; &#039; + this.points[0].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            //myTooltip += &#039;&lt;br&gt;&lt;b&gt;&#039; + this.points[1].series.name + &#039;:&lt;/b&gt; &#039; + this.points[1].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;//  headerFormat: &#039;&lt;div style=&quot; color:#363636;font-size: 16px;font-weight: 400;&quot;&gt;{point.key}&lt;/div&gt;&#039;,&#13;&#10;//  pointFormat: &#039;&lt;div style=&quot; font-size: 12px;font-weight: 600;margin-top: 4px;&quot;&gt;{series.name}: {point.y:,.0f}&lt;/div&gt;&#039;&#13;&#10;    }; &#13;&#10;&#13;&#10;    options.legend.width = 300;&#13;&#10;    &#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;                &#13;&#10;        options.legend.x = 40;&#13;&#10;        &#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;    options.chart.marginTop=0;&#13;&#10;    options.chart.marginLeft=97;&#13;&#10;},"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="6,4,12,8,10"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="0" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;cartidge_count&quot;]">
+       <grouping enabled="true"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions>
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;PII Risk Level&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6" groupType="0"/>
+    <sortKey/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">165px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">PII Risk Level</property>
+                                            <text-property name="displayName">PII Risk Level</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["PII Risk Level"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">cartidge_count</property>
+                                            <text-property name="displayName">cartidge_count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["cartidge_count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="2834"/>
+                <cell id="2835">
+                    <property name="colSpan">5</property>
+                    <property name="rowSpan">1</property>
+                    <grid id="3114">
+                        <column id="3115">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="3116">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="3117">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="3118">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="3119">
+                            <property name="width">20%</property>
+                        </column>
+                        <row id="3120">
+                            <cell id="3121">
+                                <grid id="2855">
+                                    <property name="backgroundColor">#FFFFFF</property>
+                                    <property name="borderBottomColor">#EFEFEF</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#EFEFEF</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#EFEFEF</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#EFEFEF</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <column id="2856"/>
+                                    <row id="2857">
+                                        <cell id="2858">
+                                            <label id="2859">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="paddingTop">0px</property>
+                                                <property name="paddingLeft">10px</property>
+                                                <property name="paddingBottom">0px</property>
+                                                <property name="paddingRight">0px</property>
+                                                <text-property name="text">Total Documents</text-property>
+                                            </label>
+                                            <grid id="2861">
+                                                <property name="backgroundColor">#7AB8D3</property>
+                                                <property name="verticalAlign">middle</property>
+                                                <property name="height">166px</property>
+                                                <column id="2862"/>
+                                                <row id="2863">
+                                                    <cell id="2864">
+                                                        <table id="3136">
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">doc_id</property>
+                                                                    <text-property name="displayName">Internal Document ID</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                                    <property name="dataType">decimal</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">Total Docs_All</property>
+                                                                    <expression name="expression" type="javascript">measure["Total Docs"]</expression>
+                                                                    <property name="dataType">integer</property>
+                                                                    <simple-property-list name="aggregateOn">
+                                                                        <value>All</value>
+                                                                    </simple-property-list>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="linkedDataModel">GDPR Data Model</property>
+                                                            <column id="3145"/>
+                                                            <footer>
+                                                                <row id="3143">
+                                                                    <cell id="3144">
+                                                                        <data id="3146">
+                                                                            <property name="fontSize">60px</property>
+                                                                            <property name="fontWeight">bold</property>
+                                                                            <property name="color">white</property>
+                                                                            <property name="paddingTop">25px</property>
+                                                                            <property name="paddingLeft">0px</property>
+                                                                            <property name="paddingBottom">0px</property>
+                                                                            <property name="paddingRight">0px</property>
+                                                                            <structure name="numberFormat">
+                                                                                <property name="category">Fixed</property>
+                                                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                            </structure>
+                                                                            <property name="textAlign">center</property>
+                                                                            <property name="resultSetColumn">Total Docs_All</property>
+                                                                        </data>
+                                                                    </cell>
+                                                                </row>
+                                                            </footer>
+                                                        </table>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3122">
+                                <grid id="2871">
+                                    <property name="backgroundColor">#FFFFFF</property>
+                                    <property name="borderBottomColor">#EFEFEF</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#EFEFEF</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#EFEFEF</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#EFEFEF</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <column id="2872"/>
+                                    <row id="2873">
+                                        <cell id="2874">
+                                            <label id="2875">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="paddingTop">0px</property>
+                                                <property name="paddingLeft">10px</property>
+                                                <property name="paddingBottom">0px</property>
+                                                <property name="paddingRight">0px</property>
+                                                <text-property name="text">SSNs</text-property>
+                                            </label>
+                                            <grid id="2876">
+                                                <property name="backgroundColor">#E88594</property>
+                                                <property name="verticalAlign">middle</property>
+                                                <property name="height">166px</property>
+                                                <column id="2877"/>
+                                                <row id="2878">
+                                                    <cell id="2879">
+                                                        <table id="3155">
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">doc_id</property>
+                                                                    <text-property name="displayName">Internal Document ID</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                                    <property name="dataType">decimal</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">Total Docs_All</property>
+                                                                    <expression name="expression">measure["Total Docs - SSN"]</expression>
+                                                                    <property name="dataType">integer</property>
+                                                                    <simple-property-list name="aggregateOn">
+                                                                        <value>All</value>
+                                                                    </simple-property-list>
+                                                                    <property name="allowExport">true</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="linkedDataModel">GDPR Data Model</property>
+                                                            <column id="3159"/>
+                                                            <footer>
+                                                                <row id="3156">
+                                                                    <cell id="3157">
+                                                                        <data id="3158">
+                                                                            <property name="fontSize">60px</property>
+                                                                            <property name="fontWeight">bold</property>
+                                                                            <property name="color">white</property>
+                                                                            <property name="paddingTop">25px</property>
+                                                                            <property name="paddingLeft">0px</property>
+                                                                            <property name="paddingBottom">0px</property>
+                                                                            <property name="paddingRight">0px</property>
+                                                                            <structure name="numberFormat">
+                                                                                <property name="category">Fixed</property>
+                                                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                            </structure>
+                                                                            <property name="textAlign">center</property>
+                                                                            <property name="resultSetColumn">Total Docs_All</property>
+                                                                        </data>
+                                                                    </cell>
+                                                                </row>
+                                                            </footer>
+                                                        </table>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3123">
+                                <grid id="2881">
+                                    <property name="backgroundColor">#FFFFFF</property>
+                                    <property name="borderBottomColor">#EFEFEF</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#EFEFEF</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#EFEFEF</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#EFEFEF</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <column id="2882"/>
+                                    <row id="2883">
+                                        <cell id="2884">
+                                            <label id="2885">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="paddingTop">0px</property>
+                                                <property name="paddingLeft">10px</property>
+                                                <property name="paddingBottom">0px</property>
+                                                <property name="paddingRight">0px</property>
+                                                <text-property name="text">Passports</text-property>
+                                            </label>
+                                            <grid id="2886">
+                                                <property name="backgroundColor">#E88594</property>
+                                                <property name="verticalAlign">middle</property>
+                                                <property name="height">166px</property>
+                                                <column id="2887"/>
+                                                <row id="2888">
+                                                    <cell id="2889">
+                                                        <table id="3160">
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">doc_id</property>
+                                                                    <text-property name="displayName">Internal Document ID</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                                    <property name="dataType">decimal</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">Total Docs_All</property>
+                                                                    <expression name="expression">measure["Total Docs - Passport"]</expression>
+                                                                    <property name="dataType">integer</property>
+                                                                    <simple-property-list name="aggregateOn">
+                                                                        <value>All</value>
+                                                                    </simple-property-list>
+                                                                    <property name="allowExport">true</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="linkedDataModel">GDPR Data Model</property>
+                                                            <column id="3164"/>
+                                                            <footer>
+                                                                <row id="3161">
+                                                                    <cell id="3162">
+                                                                        <data id="3163">
+                                                                            <property name="fontSize">60px</property>
+                                                                            <property name="fontWeight">bold</property>
+                                                                            <property name="color">white</property>
+                                                                            <property name="paddingTop">25px</property>
+                                                                            <property name="paddingLeft">0px</property>
+                                                                            <property name="paddingBottom">0px</property>
+                                                                            <property name="paddingRight">0px</property>
+                                                                            <structure name="numberFormat">
+                                                                                <property name="category">Fixed</property>
+                                                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                            </structure>
+                                                                            <property name="textAlign">center</property>
+                                                                            <property name="resultSetColumn">Total Docs_All</property>
+                                                                        </data>
+                                                                    </cell>
+                                                                </row>
+                                                            </footer>
+                                                        </table>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3124">
+                                <grid id="2904">
+                                    <property name="backgroundColor">#FFFFFF</property>
+                                    <property name="borderBottomColor">#EFEFEF</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#EFEFEF</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#EFEFEF</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#EFEFEF</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <column id="2905"/>
+                                    <row id="2906">
+                                        <cell id="2907">
+                                            <label id="2908">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="paddingTop">0px</property>
+                                                <property name="paddingLeft">10px</property>
+                                                <property name="paddingBottom">0px</property>
+                                                <property name="paddingRight">0px</property>
+                                                <text-property name="text">CCs</text-property>
+                                            </label>
+                                            <grid id="2909">
+                                                <property name="backgroundColor">#E88594</property>
+                                                <property name="verticalAlign">middle</property>
+                                                <property name="height">166px</property>
+                                                <column id="2910"/>
+                                                <row id="2911">
+                                                    <cell id="2912">
+                                                        <table id="3165">
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">doc_id</property>
+                                                                    <text-property name="displayName">Internal Document ID</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                                    <property name="dataType">decimal</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">Total Docs_All</property>
+                                                                    <expression name="expression">measure["Total Docs - Credit Card"]</expression>
+                                                                    <property name="dataType">integer</property>
+                                                                    <simple-property-list name="aggregateOn">
+                                                                        <value>All</value>
+                                                                    </simple-property-list>
+                                                                    <property name="allowExport">true</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="linkedDataModel">GDPR Data Model</property>
+                                                            <column id="3169"/>
+                                                            <footer>
+                                                                <row id="3166">
+                                                                    <cell id="3167">
+                                                                        <data id="3168">
+                                                                            <property name="fontSize">60px</property>
+                                                                            <property name="fontWeight">bold</property>
+                                                                            <property name="color">white</property>
+                                                                            <property name="paddingTop">25px</property>
+                                                                            <property name="paddingLeft">0px</property>
+                                                                            <property name="paddingBottom">0px</property>
+                                                                            <property name="paddingRight">0px</property>
+                                                                            <structure name="numberFormat">
+                                                                                <property name="category">Fixed</property>
+                                                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                            </structure>
+                                                                            <property name="textAlign">center</property>
+                                                                            <property name="resultSetColumn">Total Docs_All</property>
+                                                                        </data>
+                                                                    </cell>
+                                                                </row>
+                                                            </footer>
+                                                        </table>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3125">
+                                <grid id="2919">
+                                    <property name="backgroundColor">#FFFFFF</property>
+                                    <property name="borderBottomColor">#EFEFEF</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">1px</property>
+                                    <property name="borderLeftColor">#EFEFEF</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">1px</property>
+                                    <property name="borderRightColor">#EFEFEF</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">1px</property>
+                                    <property name="borderTopColor">#EFEFEF</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">1px</property>
+                                    <column id="2920"/>
+                                    <row id="2921">
+                                        <cell id="2922">
+                                            <label id="2923">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="paddingTop">0px</property>
+                                                <property name="paddingLeft">10px</property>
+                                                <property name="paddingBottom">0px</property>
+                                                <property name="paddingRight">0px</property>
+                                                <text-property name="text">Bank Info</text-property>
+                                            </label>
+                                            <grid id="2924">
+                                                <property name="backgroundColor">#E3B26F</property>
+                                                <property name="verticalAlign">middle</property>
+                                                <property name="height">166px</property>
+                                                <column id="2925"/>
+                                                <row id="2926">
+                                                    <cell id="2927">
+                                                        <table id="3170">
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">doc_id</property>
+                                                                    <text-property name="displayName">Internal Document ID</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["doc_id"]</expression>
+                                                                    <property name="dataType">decimal</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">Total Docs_All</property>
+                                                                    <expression name="expression">measure["Total Docs - Bank Account"]</expression>
+                                                                    <property name="dataType">integer</property>
+                                                                    <simple-property-list name="aggregateOn">
+                                                                        <value>All</value>
+                                                                    </simple-property-list>
+                                                                    <property name="allowExport">true</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="linkedDataModel">GDPR Data Model</property>
+                                                            <column id="3174"/>
+                                                            <footer>
+                                                                <row id="3171">
+                                                                    <cell id="3172">
+                                                                        <data id="3173">
+                                                                            <property name="fontSize">60px</property>
+                                                                            <property name="fontWeight">bold</property>
+                                                                            <property name="color">white</property>
+                                                                            <property name="paddingTop">25px</property>
+                                                                            <property name="paddingLeft">0px</property>
+                                                                            <property name="paddingBottom">0px</property>
+                                                                            <property name="paddingRight">0px</property>
+                                                                            <structure name="numberFormat">
+                                                                                <property name="category">Fixed</property>
+                                                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                                                            </structure>
+                                                                            <property name="textAlign">center</property>
+                                                                            <property name="resultSetColumn">Total Docs_All</property>
+                                                                        </data>
+                                                                    </cell>
+                                                                </row>
+                                                            </footer>
+                                                        </table>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="3085">
+                <property name="height">5px</property>
+                <cell id="3086">
+                    <property name="colSpan">7</property>
+                    <property name="rowSpan">1</property>
+                </cell>
+            </row>
+            <row id="2838">
+                <property name="height">290px</property>
+                <cell id="2839">
+                    <grid id="2929">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="2930"/>
+                        <row id="2931">
+                            <cell id="2932">
+                                <label id="2935">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">Category Type</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart1" id="2934">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;// options.tooltip.shared = true;&#13;&#10;&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;   options.series[0].pointWidth = 10;&#13;&#10;   &#13;&#10;   options.series[0].pointWidth = 10;&#13;&#10;   options.series[0].borderRadius = 5;&#13;&#10;    &#13;&#10; &#13;&#10;   &#13;&#10;   options.xAxis.labels.y = 5;&#13;&#10;   &#13;&#10;   &#13;&#10;   &#13;&#10;  options.xAxis.plotBands = [&#13;&#10;  &#13;&#10;   { from: 6.5, to: 10, color: &#039;rgba(232, 133, 148, 0.1)&#039;},&#13;&#10;   { from: 4.5, to: 6.5, color: &#039;rgba(227, 178, 111, 0.1)&#039;},&#13;&#10;   { from: -.5, to: 4.5, color: &#039;rgba(134, 228, 178, 0.1)&#039;} &#13;&#10;  &#13;&#10;  &#13;&#10;  &#13;&#10;  ];&#13;&#10;     &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = this.x + &#039;: &#039; + this.y;&#13;&#10;            //myTooltip = &#039;&lt;b&gt;&#039; + d.toLocaleDateString() + &#039;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;&#039; + this.points[0].series.name + &#039;:&lt;/b&gt; &#039; + this.points[0].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            //myTooltip += &#039;&lt;br&gt;&lt;b&gt;&#039; + this.points[1].series.name + &#039;:&lt;/b&gt; &#039; + this.points[1].y.toLocaleString() + &#039; cases&#039;;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;//  headerFormat: &#039;&lt;div style=&quot; color:#363636;font-size: 16px;font-weight: 400;&quot;&gt;{point.key}&lt;/div&gt;&#039;,&#13;&#10;//  pointFormat: &#039;&lt;div style=&quot; font-size: 12px;font-weight: 600;margin-top: 4px;&quot;&gt;{series.name}: {point.y:,.0f}&lt;/div&gt;&#039;&#13;&#10;    }; &#13;&#10;&#13;&#10;    options.legend.width = 300;&#13;&#10;    &#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;            &#13;&#10;        options.legend.x = 40;&#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;  options.chart.marginTop=20;&#13;&#10;},"/>
+  <extendedProperties name="enable.data.summarize" value="false"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="2" labelPosition="1" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;cartidge_count&quot;]">
+       <grouping enabled="true"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <triggers condition="2">
+       <action type="3">
+        <value _type="ScriptValue" script="filterDocTable(categoryData);"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="0">
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;Cartridge Type&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6"/>
+    <sortKey definition="row[&quot;Cartridge SORT&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">275px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">cartidge_count</property>
+                                            <text-property name="displayName">cartidge_count</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["cartidge_count"]</expression>
+                                            <property name="dataType">decimal</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Cartridge Type</property>
+                                            <text-property name="displayName">Cartridge Type</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Cartridge Type"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Cartridge SORT</property>
+                                            <text-property name="displayName">Cartridge SORT</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Cartridge SORT"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="2840"/>
+                <cell id="2841">
+                    <property name="colSpan">5</property>
+                    <property name="rowSpan">3</property>
+                    <text id="3113">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<div id="here"></div>
+<script>
+$("<style type='text/css'> .popup_close { right: 5px; position: absolute; top: 0; opacity: 0.9; font-size: 16px; font-weight: 800; color: white;} .popup_content { display: none; position: absolute;	top: 15%; left: 25%; width: 1100px; height: 700px; padding: 10px; border: 5px solid #B0B1BA; background-color: #616375; z-index:1002; overflow: hidden;}</style>").appendTo("head");
+</script>
+<div id="popupDetail" class="popup_content"><span id="popupClose'" class="popup_close" onclick="$('#popupDetail').hide();$('#popupDetail iframe').remove();$('#popupClose').hide();">&amp;#10006;</span></div>
+<script>	
+
+	$('table[element_type="Grid"]').css("border-width","4px").css("border-collapse","separate").css("border-radius","6px");
+
+
+	//Open report to be viewed inside a "frame"
+if ((typeof actuate.getViewer("here") === "undefined") || (actuate.getViewer("here") === null)) isEnterprise = true;
+
+else {
+	if (actuate.getViewer("here").getRequestOptions().getRepositoryType() == 'Enterprise') isEnterprise = true;
+	else isEnterprise = false;
+}
+
+if (isEnterprise)
+	var rpt = "/Applications/PII Demo 2020/Report Designs/DocListing.rptdesign";
+else
+	var rpt = "C:/Users/wongc/EclipseWorkspaces/workspace_iHub166/PII Demo 2020/Report Designs/DocListing.rptdesign";
+
+
+			var panel = new actuate.viewer.BrowserPanel();
+			uiCfg = new actuate.viewer.UIConfig();
+			uiCfg.setContentPanel(panel);
+			var vwr = new actuate.Viewer("acViewer", uiCfg);
+			var uiOptions = new actuate.viewer.UIOptions( );
+			uiOptions.enableToolBar(false);
+			vwr.setUIOptions(uiOptions);
+			theWidth = $('#container_main_dashboard').width() - 252 - 15;
+			theHeight = $('.floatPanel').height() - 308 - 15;
+			vwr.setWidth(theWidth);
+			vwr.setHeight(theHeight);
+			vwr.setReportName(rpt);
+			vwr.submit();
+			
+function filterDocTable(e) {
+			vwr.setParameters({'pPIIType': e});
+			vwr.submit();
+			//$("#acViewer").show();
+}
+
+</script>
+<div id="acViewer" style="overflow-y:auto;overflow-x:hidden;display:block;margin-top:-24px;"></div>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="2844">
+                <property name="height">5px</property>
+                <cell id="2845">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                </cell>
+                <cell id="3107"/>
+            </row>
+            <row id="3093">
+                <cell id="3094">
+                    <grid id="3101">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomColor">#EFEFEF</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftColor">#EFEFEF</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#EFEFEF</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#EFEFEF</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <column id="3102"/>
+                        <row id="3103">
+                            <cell id="3104">
+                                <label id="3105">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">10px</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <text-property name="text">File Types</text-property>
+                                </label>
+                                <extended-item extensionName="Chart" name="RiskLevelChart2" id="3106">
+                                    <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="0" reverseCategory="true">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" anchor="6" visible="false" orientation="0" position="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+   <cursor type="0"/>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.animation" value="false"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration: function(options)&#13;&#10;{&#13;&#10;    options.xAxis.crosshair = {&#13;&#10;            width: 10,&#13;&#10;            color: &#039;#EEE&#039;,&#13;&#10;            enabled: true&#13;&#10;    },&#13;&#10;    &#13;&#10;    options.xAxis.labels.y = 5;&#13;&#10;    &#13;&#10;    options.series[0].pointWidth = 10;&#13;&#10;    options.series[0].borderRadius = 5;&#13;&#10;        &#13;&#10;    options.tooltip = {&#13;&#10;        shared: true,&#13;&#10;        animation: false,&#13;&#10;        backgroundColor: &quot;#fff&quot;,&#13;&#10;        borderRadius: 0,&#13;&#10;        borderColor: &quot;#e1e1e1&quot;,&#13;&#10;        borderWidth: 1,&#13;&#10;        style: {&#13;&#10;            color:&quot;#363636&quot;,&#13;&#10;            fontFamily: &quot;Titillium Web&quot;,&#13;&#10;            fontSize: &quot;10px&quot;,&#13;&#10;            fontWeight: 700,&#13;&#10;            padding: &quot;8px&quot;&#13;&#10;        },&#13;&#10;        useHTML: true,&#13;&#10;        formatter:  function () {&#13;&#10;            myTooltip = this.x + &#039;: &#039; + this.y;&#13;&#10;            return myTooltip;&#13;&#10;        } &#13;&#10;    }; &#13;&#10;&#13;&#10;&#13;&#10;    var formatter = function () {&#13;&#10;        if (this.isFirst === undefined) return this.value.toFixed(2);&#13;&#10;        var val = this.value;&#13;&#10;        if (Math.abs(val) &gt;= 1000000000000) {&#13;&#10;            val = parseInt(val / 100000000000) / 10;&#13;&#10;            val = &quot;&quot; + val + &quot;T&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000000) {&#13;&#10;             val = parseInt(val / 100000000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;B&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000000) {&#13;&#10;             val = parseInt(val / 100000) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;M&quot;;&#13;&#10;        } else if (Math.abs(val) &gt;= 1000) {&#13;&#10;             val = parseInt(val / 100) / 10;&#13;&#10;             val = &quot;&quot; + val + &quot;K&quot;;&#13;&#10;        };&#13;&#10;        return val;&#13;&#10;    };&#13;&#10;    &#13;&#10;    if (options.yAxis &amp;&amp; options.yAxis.length) {&#13;&#10;        for (var i = 0; i &lt; options.yAxis.length; i++) {&#13;&#10;            options.yAxis[i].labels.formatter = formatter;&#13;&#10;        }&#13;&#10;    };&#13;&#10;                &#13;&#10;        options.legend.x = 40;&#13;&#10;        &#13;&#10;},&#13;&#10;&#13;&#10;beforeRendering: function(options, chart)&#13;&#10;{&#13;&#10;    options.chart.spacingTop=0;&#13;&#10;    options.chart.marginTop=0;&#13;&#10;    options.chart.marginLeft=97;&#13;&#10;},"/>
+  <extendedProperties name="enable.data.summarize" value="true"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="2" interval="1">
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <seriesPalette>
+      <entries _body=",255,0,50,100"/>
+      <entries _body=",255,24,231,220"/>
+      <entries _body=",255,232,172,57"/>
+      <entries _body=",255,128,255,128"/>
+      <entries _body=",255,64,128,128"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,170,85,85"/>
+      <entries _body=",255,128,128,0"/>
+      <entries _body=",255,192,192,192"/>
+      <entries _body=",255,255,255,128"/>
+      <entries _body=",255,128,192,128"/>
+      <entries _body=",255,7,146,94"/>
+      <entries _body=",255,0,128,255"/>
+      <entries _body=",255,255,128,192"/>
+      <entries _body=",255,0,255,255"/>
+      <entries _body=",255,255,128,128"/>
+      <entries _body=",255,0,128,192"/>
+      <entries _body=",255,128,128,192"/>
+      <entries _body=",255,255,0,255"/>
+      <entries _body=",255,128,64,64"/>
+      <entries _body=",255,255,128,64"/>
+      <entries _body=",255,80,240,120"/>
+      <entries _body=",255,0,64,128"/>
+      <entries _body=",255,128,0,64"/>
+      <entries _body=",255,255,0,128"/>
+      <entries _body=",255,128,128,64"/>
+      <entries _body=",255,128,128,128"/>
+      <entries _body=",255,255,128,255"/>
+      <entries _body=",255,0,64,0"/>
+      <entries _body=",255,0,0,0"/>
+      <entries _body=",255,255,255,255"/>
+      <entries _body=",255,255,128,0"/>
+     </seriesPalette>
+     <series _type="BarSeries" seriesIdentifier="Documents" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;normalized_file_type&quot;]">
+       <grouping enabled="true" aggregateExpression="Count"/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes visible="true">
+     <color _body=",255,242,242,242"/>
+    </lineAttributes>
+    <label>
+     <caption>
+      <font name="Titillium Web" size="9.0"/>
+      <color _body=",255,128,128,128"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes visible="true">
+      <color _body=",255,247,247,247"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes visible="false">
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes visible="false">
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="0">
+    <query definition=""/>
+    <seriesPalette>
+     <entries _body=",255,0,50,100"/>
+     <entries _body=",255,24,231,220"/>
+     <entries _body=",255,232,172,57"/>
+     <entries _body=",255,128,255,128"/>
+     <entries _body=",255,64,128,128"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,170,85,85"/>
+     <entries _body=",255,128,128,0"/>
+     <entries _body=",255,192,192,192"/>
+     <entries _body=",255,255,255,128"/>
+     <entries _body=",255,128,192,128"/>
+     <entries _body=",255,7,146,94"/>
+     <entries _body=",255,0,128,255"/>
+     <entries _body=",255,255,128,192"/>
+     <entries _body=",255,0,255,255"/>
+     <entries _body=",255,255,128,128"/>
+     <entries _body=",255,0,128,192"/>
+     <entries _body=",255,128,128,192"/>
+     <entries _body=",255,255,0,255"/>
+     <entries _body=",255,128,64,64"/>
+     <entries _body=",255,255,128,64"/>
+     <entries _body=",255,80,240,120"/>
+     <entries _body=",255,0,64,128"/>
+     <entries _body=",255,128,0,64"/>
+     <entries _body=",255,255,0,128"/>
+     <entries _body=",255,128,128,64"/>
+     <entries _body=",255,128,128,128"/>
+     <entries _body=",255,255,128,255"/>
+     <entries _body=",255,0,64,0"/>
+     <entries _body=",255,0,0,0"/>
+     <entries _body=",255,255,255,255"/>
+     <entries _body=",255,255,128,0"/>
+    </seriesPalette>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="row[&quot;normalized_file_type&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true" groupingUnit="6" aggregateExpression="Count"/>
+    <sortKey definition="row[&quot;Total Documents&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes visible="false">
+    <color _body=",255,192,192,192"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font name="Titillium Web" size="9.0"/>
+     <color _body=",255,128,128,128"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes visible="false">
+     <color _body=",255,192,192,192"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes visible="false">
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes visible="false">
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <scale tickBetweenCategories="false"/>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+                                    <property name="outputFormat">JS</property>
+                                    <property name="inheritColumns">true</property>
+                                    <property name="height">165px</property>
+                                    <property name="width">250px</property>
+                                    <expression name="bookmark" type="javascript">'RiskLevelChart'</expression>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">normalized_file_type</property>
+                                            <text-property name="displayName">File Type</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["normalized_file_type"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Total Documents</property>
+                                            <expression name="expression" type="javascript">measure["Total Documents"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="linkedDataModel">GDPR Data Model</property>
+                                </extended-item>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="3095"/>
+            </row>
+        </grid>
+    </body>
+</report>
