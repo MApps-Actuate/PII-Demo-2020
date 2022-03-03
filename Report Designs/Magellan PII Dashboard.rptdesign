@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202004021542</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202101151752</property>
     <property name="units">in</property>
     <method name="clientInitialize"><![CDATA[$("<style type='text/css'> @import url('https://fonts.googleapis.com/css?family=Titillium+Web');</style>").appendTo("head");]]></method>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -440,9 +440,9 @@ else {
 }
 
 if (isEnterprise)
-	var rpt = "/Applications/PII Demo 2020/Report Designs/DocListing.rptdesign";
+	var rpt = "/Applications/PII-Demo-2020/Report Designs/DocListing.rptdesign";
 else
-	var rpt = "E:/workspace/PII Demo 2020/Report Designs/DocListing.rptdesign";
+	var rpt = "C:/GitHub/PII-Demo-2020/Report Designs/DocListing.rptdesign";
 
 			var panel = new actuate.viewer.BrowserPanel();
 			uiCfg = new actuate.viewer.UIConfig();

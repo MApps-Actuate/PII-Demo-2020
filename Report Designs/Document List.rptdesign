@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202010131241</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v202101151752</property>
     <property name="units">in</property>
     <method name="beforeFactory"><![CDATA[importPackage(Packages.org.eclipse.birt.report.model.api);
 importPackage(Packages.org.eclipse.birt.report.model.api.elements.structures);
@@ -1114,7 +1114,7 @@ theOverflowItem = '#' + actuate.getViewer("actuateViewerContainercontainer").get
                         <property name="contentType">html</property>
                         <text-property name="content"><![CDATA[<script>	
 	//Open report to be viewed inside a "frame"
-	var rpt = "/Applications/PII Demo 2020/Report Designs/Document Detail.rptdesign";
+	var rpt = "/Applications/PII-Demo-2020/Report Designs/Document Detail.rptdesign";
 
 			//var panel = new actuate.viewer.BrowserPanel();
 			var panel = new actuate.viewer.ScrollPanel()

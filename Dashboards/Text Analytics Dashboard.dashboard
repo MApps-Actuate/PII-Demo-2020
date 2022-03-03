@@ -481,7 +481,7 @@
   <extendedProperties name="keep.hierarchy.category" value="true"/>
   <extendedProperties name="keep.hierarchy.series" value="true"/>
   <extendedProperties name="enable.data.summarize" value="false"/>
-  <extendedProperties name="jschart.client.script" value="beforeRendering: function(o,c) {o.legend.align = 'center';o.legend.layout = 'horizontal';o.legend.x = c.getChartWidth()*.2;o.legend.width = c.getChartWidth()*.9;},beforeGeneration:function(o){if(o&amp;&amp;o.chart&amp;&amp;o.chart.renderTo){var r=document.getElementById(o.chart.renderTo);if(r.parentNode&amp;&amp;r.parentNode.id){var b=r.parentNode.id;var v=actuate.getViewer(b);if(v){v.enableGlobalFilter(o);}}}}"/>
+  <extendedProperties name="jschart.client.script" value="beforeRendering: function(o,c) {o.legend.align = &#039;center&#039;;o.legend.layout = &#039;horizontal&#039;;o.legend.x = c.getChartWidth()*.2;o.legend.width = c.getChartWidth()*.9;},beforeGeneration:function(o){if(o&amp;&amp;o.chart&amp;&amp;o.chart.renderTo){var r=document.getElementById(o.chart.renderTo);if(r.parentNode&amp;&amp;r.parentNode.id){var b=r.parentNode.id;var v=actuate.getViewer(b);if(v){v.enableGlobalFilter(o);}}}}"/>
   <extendedProperties name="jschart.zoom" value="xy"/>
   <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
@@ -1318,6 +1318,13 @@
     </body>
     <property name="dashboardView">
         <dashboard id="2">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">dashboardTheme</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="dashboardTheme">ThemesReportItems31.Classic:Light</property>
             <property name="activeTab">4807ff6e-77d4-4942-a0c9-9e35c4bf7fd7</property>
             <property name="tabs">
                 <tab-element name="4807ff6e-77d4-4942-a0c9-9e35c4bf7fd7" id="1971">
@@ -1330,9 +1337,14 @@
                             <property name="name">smartLayout</property>
                             <property name="type">string</property>
                         </structure>
+                        <structure>
+                            <property name="name">tabTheme</property>
+                            <property name="type">string</property>
+                        </structure>
                     </list-property>
                     <property name="responsiveView">true</property>
                     <property name="smartLayout">{"details":{"type":"column","content":[{"type":"row","content":[{"type":"component","componentName":"Gadget_36d7d3d9-0479-4703-b8a8-3c3c1d8c6eb0","percent":0.2702702702702703},{"type":"component","componentName":"Gadget_be9597b3-c827-49e6-be74-4fa58bae711f","percent":0.2702702702702703},{"type":"component","componentName":"Gadget_6c6acdf5-137b-4f6f-aa0f-eaa05d95749e","percent":0.2165644171779141},{"type":"component","componentName":"Gadget_89754df0-63bf-42b5-b910-72cc8805613e","percent":0.24262899262899262}],"percent":0.3587385019710907},{"type":"row","content":[{"type":"component","componentName":"Gadget_e1f64fe2-214d-4f59-ab0c-65bb6a5c7fb8","percent":0.4259485924112607},{"type":"component","componentName":"Gadget_2dd17d28-5d77-4a5d-ab13-5afccec702b0","percent":0.33455433455433453},{"type":"component","componentName":"Gadget_7b803b69-cc18-4784-9f1d-3e3c2cc1421a","percent":0.23992673992673993}],"percent":0.6412614980289093}]},"mainHeight":770}</property>
+                    <property name="tabTheme">ThemesReportItems31.Classic:Light</property>
                     <property name="title">Document Summary</property>
                     <property name="backgroundColor">auto</property>
                     <property name="freeFormGadgets">
@@ -1541,16 +1553,23 @@
                             </property>
                         </gadget>
                         <gadget name="Gadget_7b803b69-cc18-4784-9f1d-3e3c2cc1421a" id="2092">
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">userPreferences</property>
+                                    <property name="type">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="userPreferences">{"gadget-caption":{}}</property>
                             <property name="x">1458px</property>
                             <property name="y">10px</property>
-                            <property name="title">Recent Personal Information</property>
+                            <property name="title">Report - TopPII</property>
                             <property name="externalGadgetURI">^/Report Designs/TopPII.rptdesign</property>
                             <property name="showTitle">false</property>
                             <property name="showBorder">true</property>
                             <property name="zIndex">9</property>
                             <property name="showScrollBar">true</property>
-                            <property name="height">738px</property>
-                            <property name="width">348px</property>
+                            <property name="height">431px</property>
+                            <property name="width">361px</property>
                             <property name="caption">
                                 <gadget-caption id="2094">
                                     <property name="showCaption">true</property>
@@ -1575,23 +1594,30 @@
                                     <property name="gadgetType">viewer</property>
                                     <property name="externalContentRef">
                                         <external-element-ref>
-                                            <property name="sourceFile">/Applications/PII Demo 2020/Report Designs/TopPII.rptdesign</property>
+                                            <property name="sourceFile">^/Report Designs/TopPII.rptdesign</property>
                                         </external-element-ref>
                                     </property>
                                 </data-view>
                             </property>
                         </gadget>
                         <gadget name="Gadget_e1f64fe2-214d-4f59-ab0c-65bb6a5c7fb8" id="2174">
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">userPreferences</property>
+                                    <property name="type">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="userPreferences">{"gadget-caption":{}}</property>
                             <property name="x">18px</property>
                             <property name="y">309px</property>
-                            <property name="title">Personal Information By Classification</property>
+                            <property name="title">Report - PII BiPartite Small</property>
                             <property name="externalGadgetURI">/Applications/GDPR-PII-Demo/Report Designs/PII BiPartite.RPTDESIGN</property>
                             <property name="showTitle">false</property>
                             <property name="showBorder">true</property>
                             <property name="zIndex">10</property>
                             <property name="showScrollBar">false</property>
-                            <property name="height">428px</property>
-                            <property name="width">700px</property>
+                            <property name="height">431px</property>
+                            <property name="width">508px</property>
                             <property name="caption">
                                 <gadget-caption id="2175">
                                     <property name="showCaption">true</property>
@@ -1616,23 +1642,30 @@
                                     <property name="gadgetType">viewer</property>
                                     <property name="externalContentRef">
                                         <external-element-ref>
-                                            <property name="sourceFile">/Applications/PII Demo 2020/Report Designs/PII BiPartite Small.rptdesign</property>
+                                            <property name="sourceFile">^/Report Designs/PII BiPartite Small.rptdesign</property>
                                         </external-element-ref>
                                     </property>
                                 </data-view>
                             </property>
                         </gadget>
                         <gadget name="Gadget_89754df0-63bf-42b5-b910-72cc8805613e" id="2180">
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">userPreferences</property>
+                                    <property name="type">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="userPreferences">{"gadget-caption":{}}</property>
                             <property name="x">1026px</property>
                             <property name="y">10px</property>
-                            <property name="title">Global Risk Index</property>
+                            <property name="title">Report - New Risk Chart</property>
                             <property name="externalGadgetURI">/Applications/GDPR-PII-Demo/Report Designs/New Risk Charts_3.rptdesign</property>
                             <property name="showTitle">true</property>
                             <property name="showBorder">true</property>
                             <property name="zIndex">11</property>
                             <property name="showScrollBar">false</property>
-                            <property name="height">236px</property>
-                            <property name="width">404px</property>
+                            <property name="height">218px</property>
+                            <property name="width">362px</property>
                             <property name="caption">
                                 <gadget-caption id="2181">
                                     <property name="showCaption">true</property>
@@ -1657,7 +1690,7 @@
                                     <property name="gadgetType">viewer</property>
                                     <property name="externalContentRef">
                                         <external-element-ref>
-                                            <property name="sourceFile">/Applications/PII Demo 2020/Report Designs/New Risk Chart.rptdesign</property>
+                                            <property name="sourceFile">^/Report Designs/New Risk Chart.rptdesign</property>
                                             <property name="targetBookmark">RiskCharts</property>
                                         </external-element-ref>
                                     </property>
@@ -1736,9 +1769,14 @@
                             <property name="name">responsiveView</property>
                             <property name="type">boolean</property>
                         </structure>
+                        <structure>
+                            <property name="name">tabTheme</property>
+                            <property name="type">string</property>
+                        </structure>
                     </list-property>
                     <property name="smartLayout">{"details":{"type":"component","componentName":"Gadget_f882c0f4-0b81-4aff-a224-7f372c167baf"},"mainHeight":982}</property>
                     <property name="responsiveView">true</property>
+                    <property name="tabTheme">ThemesReportItems31.Classic:Light</property>
                     <property name="title">Document Explore</property>
                     <property name="freeFormGadgets">
                         <gadget name="0823eb35-e0fe-43b3-b627-5fa7d623e06f" id="3588">
@@ -1763,6 +1801,13 @@
                             </property>
                         </gadget>
                         <gadget name="Gadget_f882c0f4-0b81-4aff-a224-7f372c167baf" id="3591">
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">userPreferences</property>
+                                    <property name="type">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="userPreferences">{"gadget-caption":{}}</property>
                             <property name="x">100px</property>
                             <property name="y">50px</property>
                             <property name="title">Report - Magellan PII Dashboard</property>
@@ -1771,7 +1816,8 @@
                             <property name="showBorder">true</property>
                             <property name="zIndex">2</property>
                             <property name="showScrollBar">true</property>
-                            <property name="height">250px</property>
+                            <property name="height">973px</property>
+                            <property name="width">1556px</property>
                             <property name="caption">
                                 <gadget-caption id="3592">
                                     <property name="showCaption">false</property>
@@ -1796,7 +1842,7 @@
                                     <property name="gadgetType">viewer</property>
                                     <property name="externalContentRef">
                                         <external-element-ref>
-                                            <property name="sourceFile">/Applications/PII Demo 2020/Report Designs/Magellan PII Dashboard.rptdesign</property>
+                                            <property name="sourceFile">^/Report Designs/Magellan PII Dashboard.rptdesign</property>
                                         </external-element-ref>
                                     </property>
                                 </data-view>
@@ -1814,9 +1860,14 @@
                             <property name="name">responsiveView</property>
                             <property name="type">boolean</property>
                         </structure>
+                        <structure>
+                            <property name="name">tabTheme</property>
+                            <property name="type">string</property>
+                        </structure>
                     </list-property>
                     <property name="smartLayout">{"details":{"type":"column","content":[{"type":"row","content":[{"type":"component","componentName":"Gadget_bcc340dd-50e8-41b6-9ef0-5707695f9992","percent":0.08832612723903645},{"type":"component","componentName":"Gadget_9aadd03e-25cf-4fa3-9b9a-49882b2fb2f8","percent":0.09876543209876543},{"type":"component","componentName":"Gadget_21762b1e-7015-4589-a9b2-8f9630f10875","percent":0.37199259716224553},{"type":"component","componentName":"Gadget_213d9493-566e-4c9a-a1f5-663555a705a3","percent":0.25971622455274523},{"type":"component","componentName":"Gadget_86703cfa-1267-4950-8cde-13528e889dcb","percent":0.18136952498457742}],"percent":0.27913669064748203},{"type":"component","componentName":"Gadget_6fde6433-72bf-4ed4-8e51-356d39abb2a0","percent":0.720863309352518}]},"mainHeight":712}</property>
                     <property name="responsiveView">true</property>
+                    <property name="tabTheme">ThemesReportItems31.Classic:Light</property>
                     <property name="title">Document Details</property>
                     <property name="freeFormGadgets">
                         <gadget name="f6608881-4db8-45d0-b12f-7f8551de2ec1" id="3595">
@@ -2140,6 +2191,13 @@
                             </property>
                         </gadget>
                         <gadget name="Gadget_6fde6433-72bf-4ed4-8e51-356d39abb2a0" id="3607">
+                            <list-property name="userProperties">
+                                <structure>
+                                    <property name="name">userPreferences</property>
+                                    <property name="type">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="userPreferences">{"gadget-caption":{}}</property>
                             <property name="x">160px</property>
                             <property name="y">110px</property>
                             <property name="title">Report - Document List</property>
@@ -2148,7 +2206,8 @@
                             <property name="showBorder">true</property>
                             <property name="zIndex">5</property>
                             <property name="showScrollBar">true</property>
-                            <property name="height">250px</property>
+                            <property name="height">492px</property>
+                            <property name="width">1540px</property>
                             <property name="caption">
                                 <gadget-caption id="3608">
                                     <property name="showCaption">false</property>
@@ -2173,30 +2232,21 @@
                                     <property name="gadgetType">viewer</property>
                                     <property name="externalContentRef">
                                         <external-element-ref>
-                                            <property name="sourceFile">/Applications/PII Demo 2020/Report Designs/Document List.rptdesign</property>
+                                            <property name="sourceFile">^/Report Designs/Document List.rptdesign</property>
                                         </external-element-ref>
                                     </property>
                                     <property name="paramSettings">
                                         <param-setting>
                                             <property name="paramName">pSearch</property>
-                                            <property name="displayText">null</property>
-                                            <expression name="value"></expression>
                                             <property name="isHidden">true</property>
-                                            <expression name="defaultValue" type="javascript"></expression>
                                         </param-setting>
                                         <param-setting>
                                             <property name="paramName">pSource</property>
-                                            <property name="displayText">null</property>
-                                            <expression name="value"></expression>
                                             <property name="isHidden">true</property>
-                                            <expression name="defaultValue" type="javascript"></expression>
                                         </param-setting>
                                         <param-setting>
                                             <property name="paramName">pCategory</property>
-                                            <property name="displayText">null</property>
-                                            <expression name="value"></expression>
                                             <property name="isHidden">true</property>
-                                            <expression name="defaultValue" type="javascript"></expression>
                                         </param-setting>
                                         <param-setting>
                                             <property name="paramName">pRiskLevel</property>
